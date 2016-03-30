@@ -7,12 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DC3C30201CAB6AB60070BCB1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C301F1CAB6AB60070BCB1 /* AppDelegate.m */; };
 		DC3C30231CAB6AB60070BCB1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30221CAB6AB60070BCB1 /* main.m */; };
 		DC3C30251CAB6AB60070BCB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC3C30241CAB6AB60070BCB1 /* Assets.xcassets */; };
-		DC3C30281CAB6AB60070BCB1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC3C30261CAB6AB60070BCB1 /* MainMenu.xib */; };
 		DC3C30331CAB6AB60070BCB1 /* LogStoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30321CAB6AB60070BCB1 /* LogStoryTests.m */; };
 		DC3C303E1CAB6AB60070BCB1 /* LogStoryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C303D1CAB6AB60070BCB1 /* LogStoryUITests.m */; };
+		DC3C304E1CAB6B0B0070BCB1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C304D1CAB6B0B0070BCB1 /* AppDelegate.m */; };
+		DC3C30521CAB6B700070BCB1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC3C30511CAB6B700070BCB1 /* MainMenu.xib */; };
+		DC3C305B1CAB7C050070BCB1 /* LSException.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C305A1CAB7C050070BCB1 /* LSException.m */; };
+		DC3C30691CAB88F20070BCB1 /* NSXMLElement+LogStory.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30681CAB88F20070BCB1 /* NSXMLElement+LogStory.m */; };
+		DC3C306D1CAB958A0070BCB1 /* LSCaptureObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C306C1CAB958A0070BCB1 /* LSCaptureObject.m */; };
+		DC3C30701CAB959F0070BCB1 /* LSConfigObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C306F1CAB959F0070BCB1 /* LSConfigObject.m */; };
+		DC3C30731CAB98730070BCB1 /* LSCaptureObjectList.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30721CAB98730070BCB1 /* LSCaptureObjectList.m */; };
+		DC3C30761CABA0300070BCB1 /* LSRegexObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30751CABA0300070BCB1 /* LSRegexObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,11 +40,8 @@
 
 /* Begin PBXFileReference section */
 		DC3C301B1CAB6AB60070BCB1 /* LogStory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LogStory.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC3C301E1CAB6AB60070BCB1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		DC3C301F1CAB6AB60070BCB1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		DC3C30221CAB6AB60070BCB1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DC3C30241CAB6AB60070BCB1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		DC3C30271CAB6AB60070BCB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		DC3C30291CAB6AB60070BCB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC3C302E1CAB6AB60070BCB1 /* LogStoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogStoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC3C30321CAB6AB60070BCB1 /* LogStoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogStoryTests.m; sourceTree = "<group>"; };
@@ -46,6 +49,21 @@
 		DC3C30391CAB6AB60070BCB1 /* LogStoryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogStoryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC3C303D1CAB6AB60070BCB1 /* LogStoryUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogStoryUITests.m; sourceTree = "<group>"; };
 		DC3C303F1CAB6AB60070BCB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC3C304C1CAB6B0B0070BCB1 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "App Delegate/AppDelegate.h"; sourceTree = "<group>"; };
+		DC3C304D1CAB6B0B0070BCB1 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = "App Delegate/AppDelegate.m"; sourceTree = "<group>"; };
+		DC3C30511CAB6B700070BCB1 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = Resource/Nib/MainMenu.xib; sourceTree = "<group>"; };
+		DC3C30591CAB7C050070BCB1 /* LSException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSException.h; path = Utility/Exception/LSException.h; sourceTree = "<group>"; };
+		DC3C305A1CAB7C050070BCB1 /* LSException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSException.m; path = Utility/Exception/LSException.m; sourceTree = "<group>"; };
+		DC3C30671CAB88F20070BCB1 /* NSXMLElement+LogStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSXMLElement+LogStory.h"; path = "Utility/XML/NSXMLElement+LogStory.h"; sourceTree = "<group>"; };
+		DC3C30681CAB88F20070BCB1 /* NSXMLElement+LogStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSXMLElement+LogStory.m"; path = "Utility/XML/NSXMLElement+LogStory.m"; sourceTree = "<group>"; };
+		DC3C306B1CAB958A0070BCB1 /* LSCaptureObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSCaptureObject.h; path = "Modal/Config Object/LSCaptureObject.h"; sourceTree = "<group>"; };
+		DC3C306C1CAB958A0070BCB1 /* LSCaptureObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSCaptureObject.m; path = "Modal/Config Object/LSCaptureObject.m"; sourceTree = "<group>"; };
+		DC3C306E1CAB959F0070BCB1 /* LSConfigObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSConfigObject.h; path = "Modal/Config Object/LSConfigObject.h"; sourceTree = "<group>"; };
+		DC3C306F1CAB959F0070BCB1 /* LSConfigObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSConfigObject.m; path = "Modal/Config Object/LSConfigObject.m"; sourceTree = "<group>"; };
+		DC3C30711CAB98730070BCB1 /* LSCaptureObjectList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSCaptureObjectList.h; path = "Modal/Config Object/LSCaptureObjectList.h"; sourceTree = "<group>"; };
+		DC3C30721CAB98730070BCB1 /* LSCaptureObjectList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSCaptureObjectList.m; path = "Modal/Config Object/LSCaptureObjectList.m"; sourceTree = "<group>"; };
+		DC3C30741CABA0300070BCB1 /* LSRegexObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSRegexObject.h; path = "Modal/Config Object/LSRegexObject.h"; sourceTree = "<group>"; };
+		DC3C30751CABA0300070BCB1 /* LSRegexObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSRegexObject.m; path = "Modal/Config Object/LSRegexObject.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,11 +114,10 @@
 		DC3C301D1CAB6AB60070BCB1 /* LogStory */ = {
 			isa = PBXGroup;
 			children = (
-				DC3C301E1CAB6AB60070BCB1 /* AppDelegate.h */,
-				DC3C301F1CAB6AB60070BCB1 /* AppDelegate.m */,
-				DC3C30241CAB6AB60070BCB1 /* Assets.xcassets */,
-				DC3C30261CAB6AB60070BCB1 /* MainMenu.xib */,
-				DC3C30291CAB6AB60070BCB1 /* Info.plist */,
+				DC3C30571CAB7BEC0070BCB1 /* Utility */,
+				DC3C30531CAB6B8D0070BCB1 /* Modal */,
+				DC3C304B1CAB6B000070BCB1 /* App Delegate */,
+				DC3C304F1CAB6B480070BCB1 /* Resource */,
 				DC3C30211CAB6AB60070BCB1 /* Supporting Files */,
 			);
 			path = LogStory;
@@ -109,6 +126,8 @@
 		DC3C30211CAB6AB60070BCB1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DC3C30241CAB6AB60070BCB1 /* Assets.xcassets */,
+				DC3C30291CAB6AB60070BCB1 /* Info.plist */,
 				DC3C30221CAB6AB60070BCB1 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -130,6 +149,81 @@
 				DC3C303F1CAB6AB60070BCB1 /* Info.plist */,
 			);
 			path = LogStoryUITests;
+			sourceTree = "<group>";
+		};
+		DC3C304B1CAB6B000070BCB1 /* App Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				DC3C304C1CAB6B0B0070BCB1 /* AppDelegate.h */,
+				DC3C304D1CAB6B0B0070BCB1 /* AppDelegate.m */,
+			);
+			name = "App Delegate";
+			sourceTree = "<group>";
+		};
+		DC3C304F1CAB6B480070BCB1 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				DC3C30501CAB6B4F0070BCB1 /* Nib */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
+		DC3C30501CAB6B4F0070BCB1 /* Nib */ = {
+			isa = PBXGroup;
+			children = (
+				DC3C30511CAB6B700070BCB1 /* MainMenu.xib */,
+			);
+			name = Nib;
+			sourceTree = "<group>";
+		};
+		DC3C30531CAB6B8D0070BCB1 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				DC3C306A1CAB957B0070BCB1 /* Config Object */,
+			);
+			name = Modal;
+			sourceTree = "<group>";
+		};
+		DC3C30571CAB7BEC0070BCB1 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				DC3C30661CAB887F0070BCB1 /* XML */,
+				DC3C30581CAB7BF10070BCB1 /* Exception */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		DC3C30581CAB7BF10070BCB1 /* Exception */ = {
+			isa = PBXGroup;
+			children = (
+				DC3C30591CAB7C050070BCB1 /* LSException.h */,
+				DC3C305A1CAB7C050070BCB1 /* LSException.m */,
+			);
+			name = Exception;
+			sourceTree = "<group>";
+		};
+		DC3C30661CAB887F0070BCB1 /* XML */ = {
+			isa = PBXGroup;
+			children = (
+				DC3C30671CAB88F20070BCB1 /* NSXMLElement+LogStory.h */,
+				DC3C30681CAB88F20070BCB1 /* NSXMLElement+LogStory.m */,
+			);
+			name = XML;
+			sourceTree = "<group>";
+		};
+		DC3C306A1CAB957B0070BCB1 /* Config Object */ = {
+			isa = PBXGroup;
+			children = (
+				DC3C306E1CAB959F0070BCB1 /* LSConfigObject.h */,
+				DC3C306F1CAB959F0070BCB1 /* LSConfigObject.m */,
+				DC3C306B1CAB958A0070BCB1 /* LSCaptureObject.h */,
+				DC3C306C1CAB958A0070BCB1 /* LSCaptureObject.m */,
+				DC3C30711CAB98730070BCB1 /* LSCaptureObjectList.h */,
+				DC3C30721CAB98730070BCB1 /* LSCaptureObjectList.m */,
+				DC3C30741CABA0300070BCB1 /* LSRegexObject.h */,
+				DC3C30751CABA0300070BCB1 /* LSRegexObject.m */,
+			);
+			name = "Config Object";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,7 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC3C30251CAB6AB60070BCB1 /* Assets.xcassets in Resources */,
-				DC3C30281CAB6AB60070BCB1 /* MainMenu.xib in Resources */,
+				DC3C30521CAB6B700070BCB1 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,8 +355,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC3C30731CAB98730070BCB1 /* LSCaptureObjectList.m in Sources */,
+				DC3C304E1CAB6B0B0070BCB1 /* AppDelegate.m in Sources */,
+				DC3C306D1CAB958A0070BCB1 /* LSCaptureObject.m in Sources */,
+				DC3C30761CABA0300070BCB1 /* LSRegexObject.m in Sources */,
+				DC3C30691CAB88F20070BCB1 /* NSXMLElement+LogStory.m in Sources */,
+				DC3C30701CAB959F0070BCB1 /* LSConfigObject.m in Sources */,
 				DC3C30231CAB6AB60070BCB1 /* main.m in Sources */,
-				DC3C30201CAB6AB60070BCB1 /* AppDelegate.m in Sources */,
+				DC3C305B1CAB7C050070BCB1 /* LSException.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,17 +396,6 @@
 			targetProxy = DC3C303A1CAB6AB60070BCB1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		DC3C30261CAB6AB60070BCB1 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DC3C30271CAB6AB60070BCB1 /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		DC3C30401CAB6AB60070BCB1 /* Debug */ = {
