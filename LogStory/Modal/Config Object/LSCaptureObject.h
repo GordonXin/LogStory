@@ -9,18 +9,33 @@
 #import <Foundation/Foundation.h>
 #import "LSConfigObject.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
+@class LSConfigObject;
+
+extern  NSString * const kLSCaptureObject;
+extern  NSString * const kLSCaptureObjectList;
+
 @interface LSCaptureObject : LSConfigObject
 
-@property (nonatomic, readonly, copy) NSString *objectName;
+@property (nonatomic, readonly, copy) NSString     *name;
+@property (nonatomic, readonly, copy) NSString     *type;
 
-@property (nonatomic, readonly, copy) NSString *ObjectType;
+@end
+
+@interface LSCaptureObjectList : LSConfigObjectList
+
+@property (nonatomic, readonly, copy) NSArray      *captureObjects;
 
 @end
 
-@interface LSCaptureObject (factoryMethod)
+@interface LSCaptureType : NSObject
 
-+(id)captureObjectWithElement:(NSXMLElement *)element;
++(NSArray *)leagalCaptureType;
 
-+(NSArray *)captureObjectArrayWithParentElement:(NSXMLElement *)element;
++(BOOL)isleagalCaptureType:(NSString *)type;
 
 @end
+
+
+NS_ASSUME_NONNULL_END

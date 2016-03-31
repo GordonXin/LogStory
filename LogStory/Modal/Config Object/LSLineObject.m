@@ -1,36 +1,36 @@
 //
-//  LSRegexObject.m
+//  LSLineObject.m
 //  LogStory
 //
 //  Created by cynthia on 3/30/16.
 //  Copyright © 2016 Gordon Xin. All rights reserved.
 //
 
+#import "LSLineObject.h"
 #import "LSRegexObject.h"
-#import "LSCaptureObject.h"
+#import "LSTimeObject.h"
 
 #import "LSError.h"
 #import "LSXMLHelper.h"
 
-NSString * const kLSRegexObject = @"LSRegex";
 
-NSString * const kExpressionKey = @"Expression";
+NSString * const kLSLineObject = @"LSLine";
 
-@implementation LSRegexObject
+@implementation LSLineObject
 
 -(instancetype)initWithElementNode:(NSXMLElement *)element error:(NSError *__autoreleasing *)outError
 {
     if (self = [super initWithElementNode:element error:outError])
     {
-        
+    
     }
     return self;
 }
 
--(BOOL)readNode:(NSXMLElement *)element error:(NSError *__autoreleasing *)outError
+-(BOOL)readNode:(NSXMLElement *)element error:(NSError * __autoreleasing *)outError
 {
     // check
-    if (![element.name isEqualToString:kLSRegexObject])
+    if (![element.name isEqualToString:kLSLineObject])
     {
         if (outError)
         {
@@ -41,41 +41,40 @@ NSString * const kExpressionKey = @"Expression";
         return NO;
     }
     
-    // read <Expression></Expression>
-    NSXMLElement *regexNode = [LSXMLHelper firtElementWithName:kExpressionKey ofParent:element];
+    NSXMLElement *regexNode = [LSXMLHelper firtElementWithName:kLSRegexObject ofParent:element];
     if (!regexNode)
     {
         if (outError)
         {
             *outError = [LSError errorFromClass:self.class
                                        selector:_cmd
-                                         format:@"Initialization failed, because can't find %@ element in input element:%@", kExpressionKey, element.name];
+                                         format:@"Initialization failed, because can't find node with name:%@", kLSRegexObject];
         }
         return NO;
     }
-    _regexString = [regexNode stringValue];
-    if (![_regexString length])
+    _regexObject = [[LSRegexObject alloc] initWithElementNode:regexNode error:outError];
+    if (!regexNode)
+    {
+        return NO;
+    }
+    
+    NSXMLElement *timeNode = [LSXMLHelper firtElementWithName:kLSTimeObject ofParent:element];
+    if (!timeNode)
     {
         if (outError)
         {
             *outError = [LSError errorFromClass:self.class
                                        selector:_cmd
-                                         format:@"Initialization failed, because %@ value is empty", kExpressionKey];
+                                         format:@"Initialization failed, because can't find node with name:%@", kLSTimeObject];
         }
         return NO;
     }
-    
-    // read <LSCaptureList></LSCaptureList>
-    NSXMLElement *captureNode = [LSXMLHelper firtElementWithName:kLSCaptureObjectList ofParent:element];
-    if (captureNode)
+    _timeObject = [[LSTimeObject alloc] initWithElementNode:timeNode error:outError];
+    if (!timeNode)
     {
-        _captureList = [[LSCaptureObjectList alloc] initWithElementNode:element error:outError];
-        if (!_captureList)
-        {
-            return NO;
-        }
+        return NO;
     }
-
+    
     return YES;
 }
 

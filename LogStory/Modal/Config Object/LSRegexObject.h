@@ -9,14 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "LSConfigObject.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
+extern NSString * const kLSRegexObject;
+
 @class LSCaptureObjectList;
 
 @interface LSRegexObject : LSConfigObject
 
-@property (nonatomic, readonly, copy) NSString *expression;
+@property (nonatomic, readonly, copy) NSString                          *regexString;
 
-@property (nonatomic, readonly, copy) NSArray  *options;
-
-@property (nonatomic, readonly, strong) LSCaptureObjectList *captureList;
+@property (nonatomic, readonly, strong, nullable) LSCaptureObjectList     *captureList;
 
 @end
+
+NS_ASSUME_NONNULL_END

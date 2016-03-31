@@ -7,125 +7,186 @@
 //
 
 #import "LSCaptureObject.h"
-#import "LSException.h"
-#import "NSXMLElement+LogStory.h"
 
-static NSString * const kLSCaptureObject = @"LSCapture";
+#import "LSXMLHelper.h"
+#import "LSError.h"
 
-static NSString * const kLSCaptureName = @"LSCaptureName";
-static NSString * const kLSCaptureType = @"LSCaptureType";
+NSString * const kLSCaptureObject       = @"LSCapture";
+NSString * const kLSCaptureObjectList   = @"LSCaptureList";
+
+static NSString * const kNameNodeKey    = @"Name";
+static NSString * const kTypeNodeKey    = @"Type";
 
 @implementation LSCaptureObject
 
-#pragma mark -
-#pragma mark        XML loading
-#pragma mark -
-
--(id)initWithElementNode:(NSXMLElement *)elementNode
+-(instancetype)initWithElementNode:(NSXMLElement *)element error:(NSError * __autoreleasing *)outError
 {
-    if (self = [super init])
+    if (self = [super initWithElementNode:element error:outError])
     {
-        NSXMLElement *nameNode = [elementNode childrenElementWithName:kLSCaptureName];
-        if (nameNode == nil)
+        if (![self readElement:element error:outError])
         {
-            [LSException raise:SELF_OBJ_NAME format:@""];
             return nil;
         }
-        _objectName = nameNode.stringValue;
-        
-        NSXMLElement *typeNode = [elementNode childrenElementWithName:kLSCaptureType];
-        if (typeNode == nil)
-        {
-            [LSException raise:SELF_OBJ_NAME format:@""];
-            return nil;
-        }
-        _ObjectType = typeNode.stringValue;
     }
     return self;
 }
 
-#pragma mark -
-#pragma mark        XML writing
-#pragma mark -
-
--(id)initWithAttributes:(NSDictionary *)attributes
+-(BOOL)readElement:(NSXMLElement *)element error:(NSError * __autoreleasing *)outError
 {
-    NSString *objectName = [attributes objectForKey:kLSCaptureName];
-    if (objectName == nil || objectName.length <= 0)
+    // check
+    if (![element.name isEqualToString:kLSCaptureObject])
     {
-        [LSException raise:SELF_OBJ_NAME format:@""];
-        return nil;
+        if (outError)
+        {
+            *outError = [LSError errorFromClass:self.class
+                                       selector:_cmd
+                                         format:@"Initialization failed, because input element with wrong name:%@", element.name];
+        }
+        return NO;
     }
     
-    NSString *objectType = [attributes objectForKey:kLSCaptureType];
-    if (objectType == nil || objectType.length <= 0)
+    // read <Name></Name>
+    NSXMLElement *nameNode = [LSXMLHelper firtElementWithName:kNameNodeKey ofParent:element];
+    if (!nameNode)
     {
-        [LSException raise:SELF_OBJ_NAME format:@""];
-        return nil;
+        if (outError)
+        {
+            *outError = [LSError errorFromClass:self.class
+                                       selector:_cmd
+                                         format:@"Initialization failed, because can't find %@ element in input element:%@", kNameNodeKey, element.name];
+        }
+        return NO;
+    }
+    _name = [nameNode stringValue];
+    if (![_name length])
+    {
+        if (outError)
+        {
+            *outError = [LSError errorFromClass:self.class
+                                       selector:_cmd
+                                         format:@"Initialization failed, because %@ value is empty", kNameNodeKey];
+        }
+        return NO;
     }
     
-    if (self = [super init])
+    // read <Type></Type>
+    NSXMLElement *typeNode = [LSXMLHelper firtElementWithName:kTypeNodeKey ofParent:element];
+    if (!typeNode)
     {
-        _objectName = [objectName copy];
-        _ObjectType = [objectType copy];
+        if (outError)
+        {
+            *outError = [LSError errorFromClass:self.class
+                                       selector:_cmd
+                                         format:@"Initialization failed, because can't find %@ element in input element:%@", kNameNodeKey, element.name];
+        }
+        return NO;
     }
-    return self;
-}
-
--(NSXMLElement *)element
-{
-    NSXMLElement *node = [[NSXMLElement alloc] initWithName:kLSCaptureObject];
+    _type = [typeNode stringValue];
+    if (![_type length])
+    {
+        if (outError)
+        {
+            *outError = [LSError errorFromClass:self.class
+                                       selector:_cmd
+                                         format:@"Initialization failed, because %@ value is empty", kNameNodeKey];
+        }
+        return NO;
+    }
+    if (![LSCaptureType isleagalCaptureType:_type])
+    {
+        if (outError)
+        {
+            *outError = [LSError errorFromClass:self.class
+                                       selector:_cmd
+                                         format:@"Initialization failed, because %@ is not leagal capture type", _type];
+        }
+        return NO;
+    }
     
-    NSXMLElement *nameNode = [[NSXMLElement alloc] initWithName:kLSCaptureName stringValue:_objectName];
-    NSXMLElement *typeNode = [[NSXMLElement alloc] initWithName:kLSCaptureType stringValue:_ObjectType];
-    
-    [node addChild:nameNode];
-    [node addChild:typeNode];
-    
-    return node;
+    return YES;
 }
 
 @end
 
-@implementation LSCaptureObject (factoryMethod)
+@implementation LSCaptureObjectList
 
-+(id)captureObjectWithElement:(NSXMLElement *)element
+-(instancetype)initWithElementNode:(NSXMLElement *)element error:(NSError * __autoreleasing *)outError
 {
-    if (element == nil)
+    if (self = [super initWithElementNode:element error:outError])
     {
-        [LSException raise:SELF_OBJ_NAME format:@""];
-        return nil;
+        _captureObjects = [self readElement:element error:outError];
+        if (!_captureObjects)
+        {
+            return nil;
+        }
     }
-    
-    if ([element.name isEqualToString:kLSCaptureObject])
-    {
-        return [[LSCaptureObject alloc] initWithElementNode:element];
-    }
-
-    return nil;
+    return self;
 }
 
-+(NSArray *)captureObjectArrayWithParentElement:(NSXMLElement *)element
+-(NSArray *)readElement:(NSXMLElement *)element error:(NSError * __autoreleasing *)outError
 {
-    if (element == nil)
+    // check
+    if (![element.name isEqualToString:kLSCaptureObjectList])
     {
-        [LSException raise:SELF_OBJ_NAME format:@""];
+        if (outError)
+        {
+            *outError = [LSError errorFromClass:self.class
+                                       selector:_cmd
+                                         format:@"Initialization failed, because input element with wrong name:%@", element.name];
+        }
         return nil;
     }
     
     NSMutableArray *array = [NSMutableArray array];
+    NSArray *nodeList = [element elementsForName:kLSCaptureObject];
     
-    for (NSXMLElement *child in element.children)
+    if ([nodeList count])
     {
-        LSCaptureObject *captureObject = [LSCaptureObject captureObjectWithElement:child];
-        [array addObject:captureObject];
+        for (NSXMLElement *child in nodeList)
+        {
+            if (!child) continue;
+            if (![child.name isEqualToString:kLSCaptureObject]) continue;
+            
+            LSCaptureObject *obj = [[LSCaptureObject alloc]initWithElementNode:child error:outError];
+            if (!obj)
+            {
+                return nil;
+            }
+            [array addObject:obj];
+        }
     }
-    if (array.count)
-    {
-        return [NSArray arrayWithArray:array];
-    }
-    return nil;
+    
+    return [NSArray arrayWithArray:array];
 }
 
 @end
 
+
+@implementation LSCaptureType
+
+static NSArray *_captureTypeList = nil;
++(NSArray *)leagalCaptureType
+{
+    if (_captureTypeList == nil)
+    {
+        _captureTypeList = @[
+                            @"Integer",
+                            @"String",
+                            @"Float",
+                            ];
+    }
+    return _captureTypeList;
+}
+
++(BOOL)isleagalCaptureType:(NSString *)type
+{
+    NSArray *leagalTypes = [self leagalCaptureType];
+    
+    if ([leagalTypes containsObject:type])
+    {
+        return YES;
+    }
+    return NO;
+}
+
+@end

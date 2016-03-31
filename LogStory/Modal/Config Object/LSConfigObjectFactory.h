@@ -1,5 +1,5 @@
 //
-//  NSXMLElement+LogStory.h
+//  LSConfigObjectFactory.h
 //  LogStory
 //
 //  Created by cynthia on 3/30/16.
@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSXMLElement (LogStory)
+@interface LSConfigObjectFactory : NSObject
 
--(NSXMLElement *)childrenElementWithName:(NSString *)name;
++(id)configObjectWithElement:(NSXMLElement *)element;
 
 @end
