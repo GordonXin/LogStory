@@ -7,37 +7,26 @@
 //
 
 #import "LSFileBase.h"
-#import "LSError.h"
 
 @implementation LSFileBase
 
--(instancetype)initWithURL:(NSURL *)fileURL error:(NSError *__autoreleasing *)outError;
+-(instancetype)initWithURL:(NSURL *)fileURL
 {
-    BOOL isDirectory = YES;
-    
-    if (![[NSFileManager defaultManager] fileExistsAtPath:fileURL.path isDirectory:&isDirectory])
-    {
-        if (outError)
-        {
-            *outError = [LSError errorFromClass:self.class
-                                       selector:_cmd
-                                         format:@"file doesn't exist at path: %@", fileURL];
-        }
-        return nil;
-    }
-    if (isDirectory)
-    {
-        if (outError)
-        {
-            *outError = [LSError errorFromClass:self.class
-                                       selector:_cmd
-                                         format:@"URL %@ is a directory", fileURL];
-        }
-        return nil;
-    }
-
     if (self = [super init])
     {
+        _errorMessage = @"";
+        
+        BOOL isDirectory = YES;
+        if (![[NSFileManager defaultManager] fileExistsAtPath:fileURL.path isDirectory:&isDirectory])
+        {
+            _errorMessage = [NSString stringWithFormat:@"[FileBase] file doesn't exist at path: %@", fileURL];
+            return self;
+        }
+        if (isDirectory)
+        {
+            _errorMessage = [NSString stringWithFormat:@"URL %@ is a directory", fileURL];
+            return self;
+        }
     }
     return self;
 }

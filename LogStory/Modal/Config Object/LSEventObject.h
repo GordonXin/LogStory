@@ -18,7 +18,8 @@ extern NSString * const kLSEventObject;
 
 @property (nonatomic, readonly, strong) LSCaptureObject *timeCapture;
 @property (nonatomic, readonly, strong) LSCaptureObject *contentCapture;
-@property (nonatomic, readonly, strong) NSArray         *captureArray;
+@property (nonatomic, readonly, strong) NSArray<LSCaptureObject *> *captureArray;
+
 @property (nonatomic, readonly, strong) LSRegexObject   *regexObj;
 @property (nonatomic, readonly, strong) LSTimeObject    *timeObj;
 

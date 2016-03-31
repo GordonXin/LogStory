@@ -7,32 +7,34 @@
 //
 
 #import "LSLogFile.h"
-#import "LSError.h"
 
 @implementation LSLogFile
 
--(instancetype)initWithURL:(NSURL *)fileURL error:(NSError *__autoreleasing *)outError
+-(instancetype)initWithURL:(NSURL *)fileURL
 {
     if (self = [super init])
     {
-        if (![self readFileFromURL:fileURL error:outError])
+        if (self.errorMessage.length)
         {
-            return nil;
+            return self;
         }
+        
+        [self readFileFromURL:fileURL];
     }
     return self;
 }
 
--(BOOL)readFileFromURL:(NSURL *)fileURL error:(NSError *__autoreleasing *)outError
+-(void)readFileFromURL:(NSURL *)fileURL
 {    
     NSStringEncoding encoding;
-    _fileString = [NSString stringWithContentsOfURL:fileURL usedEncoding:&encoding error:outError];
+    NSError *error = nil;
+    
+    _fileString = [NSString stringWithContentsOfURL:fileURL usedEncoding:&encoding error:&error];
     if (!_fileString)
     {
-        return NO;
+        self.errorMessage = [NSString stringWithFormat:@"[LogFile] Read file failed. %@, reason: %@", [error localizedDescription], [error localizedFailureReason]];
+        return;
     }
-    
-    return YES;
 }
 
 @end

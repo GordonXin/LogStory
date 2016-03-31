@@ -8,6 +8,7 @@
 
 #import "LSPairArray.h"
 
+
 @interface LSConfigObject : NSObject
 
 //

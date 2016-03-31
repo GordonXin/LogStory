@@ -8,6 +8,15 @@
 
 #import "LSConfigObject.h"
 
+extern NSString * const kLSArgumentObject;
+
+extern NSString * const kLSArgumentObjectTypeKey;
+extern NSString * const KLSArgumentObjectVauleKey;
+
 @interface LSArgumentObject : LSConfigObject
+
+@property (nonatomic, readonly, copy) NSString *type;
+
+@property (nonatomic, readonly, copy) NSString *value;
 
 @end

@@ -7,9 +7,7 @@
 //
 
 #import "LSCaptureObject.h"
-
-#import "LSXMLHelper.h"
-#import "LSError.h"
+#import "LSTypeObject.h"
 
 NSString * const kLSCaptureObject           = @"LSCapture";
 
@@ -23,29 +21,19 @@ NSString * const kLSCaptureObjectTypeKey    = @"Type";
     return kLSCaptureObject;
 }
 
-static NSArray *_captureTypeList = nil;
-+(NSArray *)captureTypeList
++(LSCaptureObject *)captureObjecWithName:(NSString *)name inArray:(NSArray<LSCaptureObject *>*)array
 {
-    if (_captureTypeList == nil)
+    if ([array count])
     {
-        _captureTypeList = @[
-                             @"Integer",
-                             @"String",
-                             @"Float",
-                             ];
+        for (LSCaptureObject *obj in array)
+        {
+            if ([[obj name] isEqualToString:name])
+            {
+                return obj;
+            }
+        }
     }
-    return _captureTypeList;
-}
-
-+(BOOL)islegalCaptureType:(NSString *)type
-{
-    NSArray *legalTypes = [self captureTypeList];
-    
-    if ([legalTypes containsObject:type])
-    {
-        return YES;
-    }
-    return NO;
+    return nil;
 }
 
 -(void)checkAttributes
@@ -64,9 +52,9 @@ static NSArray *_captureTypeList = nil;
         return;
     }
     
-    if ([LSCaptureObject islegalCaptureType:_type])
+    if ([LSTypeObject isSupportedType:_type])
     {
-        self.errorMessage = [NSString stringWithFormat:@"Capture type is not supported"];
+        self.errorMessage = [NSString stringWithFormat:@"Capture type %@ is not supported", _type];
         return;
     }
 }

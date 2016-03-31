@@ -7,21 +7,27 @@
 //
 
 #import "LSConfigFile.h"
-#import "LSException.h"
 
 @implementation LSConfigFile
 
--(instancetype)initWithURL:(NSURL *)fileURL error:(NSError *__autoreleasing *)outError
+-(instancetype)initWithURL:(NSURL *)fileURL
 {
-    if (self = [super initWithURL:fileURL error:outError])
+    if (self = [super initWithURL:fileURL])
     {
+        if (self.errorMessage.length)
+        {
+            return self;
+        }
+        
+        NSError *error = nil;
         _documentNode = [[NSXMLDocument alloc] initWithContentsOfURL:fileURL
                                                              options:NSXMLDocumentTidyXML
-                                                               error:outError];
+                                                               error:&error];
         
         if (!_documentNode)
         {
-            return nil;
+            self.errorMessage = [NSString stringWithFormat:@"[ConfigFile] Read file failed. %@ reason: %@", [error localizedDescription], [error localizedFailureReason]];
+            return self;
         }
     }
     return self;

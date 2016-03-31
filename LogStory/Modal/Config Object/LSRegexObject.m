@@ -30,6 +30,8 @@ NSString * const kLSRegexObjectCaseKey       = @"CaseSensitive";
         return;
     }
     
+    _captureArray = [self attributeArrayWithKey:kLSCaptureObject proposedClass:[LSCaptureObject class]];
+    
     _regex = [self generateRegex];
 }
 

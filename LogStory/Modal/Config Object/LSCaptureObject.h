@@ -15,6 +15,8 @@ extern  NSString * const kLSCaptureObjectTypeKey;
 
 @interface LSCaptureObject : LSConfigObject
 
++(LSCaptureObject *)captureObjecWithName:(NSString *)name inArray:(NSArray<LSCaptureObject *>*)array;
+
 @property (nonatomic, readonly, copy)   NSString *name;
 
 @property (nonatomic, readonly, copy)   NSString *type;

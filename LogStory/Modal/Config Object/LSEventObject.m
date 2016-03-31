@@ -43,32 +43,19 @@ NSString * const kLLEventObject = @"LSEvent";
         return;
     }
     
-    _timeCapture = [self captureObjecWithKey:@"Time" inArray:_captureArray];
+    _timeCapture = [LSCaptureObject captureObjecWithName:@"Time" inArray:_captureArray];
     if (!_timeCapture)
     {
         self.errorMessage = [NSString stringWithFormat:@"Event Filter must contain Capture node for Time"];
         return;
     }
     
-    _contentCapture = [self captureObjecWithKey:@"Content" inArray:_captureArray];
+    _contentCapture = [LSCaptureObject captureObjecWithName:@"Content" inArray:_captureArray];
     if (!_contentCapture)
     {
         self.errorMessage = [NSString stringWithFormat:@"Event Filter must contain Capture node for Content"];
         return;
     }
-}
-
--(LSCaptureObject *)captureObjecWithKey:(NSString *)key inArray:(NSArray *)captureArray
-{
-    for (LSCaptureObject *obj in captureArray)
-    {
-        NSString *name = [obj attributeWithKey:kLSCaptureObjectNameKey proposedClass:[NSString class]];
-        if ([name isEqualToString:key])
-        {
-            return obj;
-        }
-    }
-    return nil;
 }
 
 @end

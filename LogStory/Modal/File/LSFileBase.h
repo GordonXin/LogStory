@@ -10,6 +10,8 @@
 
 @interface LSFileBase : NSObject
 
--(instancetype)initWithURL:(NSURL *)fileURL error:(NSError *__autoreleasing *)outError;
+-(instancetype)initWithURL:(NSURL *)fileURL;
+
+@property (nonatomic, readwrite, copy) NSString *errorMessage;
 
 @end

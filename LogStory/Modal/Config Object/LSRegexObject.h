@@ -8,6 +8,8 @@
 
 #import "LSConfigObject.h"
 
+@class LSCaptureObject;
+
 extern NSString * const kLSRegexObject;
 
 extern NSString * const kLSRegexObjectExpressionKey;
@@ -16,6 +18,6 @@ extern NSString * const kLSRegexObjectExpressionKey;
 
 @property (nonatomic, readonly, strong) NSRegularExpression *regex;
 
-@property (nonatomic, readonly, strong) NSArray *captureArray;
+@property (nonatomic, readonly, strong) NSArray<LSCaptureObject *> *captureArray;
 
 @end

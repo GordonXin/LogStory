@@ -24,11 +24,13 @@
 		DC3C308A1CACB5B30070BCB1 /* LSFileBase.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30891CACB5B30070BCB1 /* LSFileBase.m */; };
 		DC3C308D1CACB6120070BCB1 /* LSLogFile.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C308C1CACB6120070BCB1 /* LSLogFile.m */; };
 		DC3C30901CACB7680070BCB1 /* LSConfigFile.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C308F1CACB7680070BCB1 /* LSConfigFile.m */; };
-		DC3C30931CACB8EB0070BCB1 /* LSLineFormatFile.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30921CACB8EB0070BCB1 /* LSLineFormatFile.m */; };
+		DC3C30931CACB8EB0070BCB1 /* LSEventFormatFile.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30921CACB8EB0070BCB1 /* LSEventFormatFile.m */; };
 		DC3C30971CACC19D0070BCB1 /* LSXMLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30961CACC19D0070BCB1 /* LSXMLHelper.m */; };
 		DC3C309A1CACC4E90070BCB1 /* LSError.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30991CACC4E90070BCB1 /* LSError.m */; };
 		DC5CADC31CACEE890058A236 /* LSActionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5CADC21CACEE890058A236 /* LSActionObject.m */; };
 		DC5CADC61CACF1FF0058A236 /* LSArgumentObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5CADC51CACF1FF0058A236 /* LSArgumentObject.m */; };
+		DC5CADCA1CAD21D80058A236 /* LSTypeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5CADC91CAD21D80058A236 /* LSTypeObject.m */; };
+		DC5CADCD1CAD284F0058A236 /* LSFilterObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5CADCC1CAD284F0058A236 /* LSFilterObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,8 +86,8 @@
 		DC3C308C1CACB6120070BCB1 /* LSLogFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSLogFile.m; path = Modal/File/LSLogFile.m; sourceTree = "<group>"; };
 		DC3C308E1CACB7680070BCB1 /* LSConfigFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSConfigFile.h; path = Modal/File/LSConfigFile.h; sourceTree = "<group>"; };
 		DC3C308F1CACB7680070BCB1 /* LSConfigFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSConfigFile.m; path = Modal/File/LSConfigFile.m; sourceTree = "<group>"; };
-		DC3C30911CACB8EB0070BCB1 /* LSLineFormatFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSLineFormatFile.h; path = Modal/File/LSLineFormatFile.h; sourceTree = "<group>"; };
-		DC3C30921CACB8EB0070BCB1 /* LSLineFormatFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSLineFormatFile.m; path = Modal/File/LSLineFormatFile.m; sourceTree = "<group>"; };
+		DC3C30911CACB8EB0070BCB1 /* LSEventFormatFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSEventFormatFile.h; path = Modal/File/LSEventFormatFile.h; sourceTree = "<group>"; };
+		DC3C30921CACB8EB0070BCB1 /* LSEventFormatFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSEventFormatFile.m; path = Modal/File/LSEventFormatFile.m; sourceTree = "<group>"; };
 		DC3C30951CACC19D0070BCB1 /* LSXMLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSXMLHelper.h; path = Utility/XML/LSXMLHelper.h; sourceTree = "<group>"; };
 		DC3C30961CACC19D0070BCB1 /* LSXMLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSXMLHelper.m; path = Utility/XML/LSXMLHelper.m; sourceTree = "<group>"; };
 		DC3C30981CACC4E90070BCB1 /* LSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSError.h; path = Utility/Exception/LSError.h; sourceTree = "<group>"; };
@@ -94,6 +96,10 @@
 		DC5CADC21CACEE890058A236 /* LSActionObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSActionObject.m; path = "Modal/Config Object/LSActionObject.m"; sourceTree = "<group>"; };
 		DC5CADC41CACF1FF0058A236 /* LSArgumentObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSArgumentObject.h; path = "Modal/Config Object/LSArgumentObject.h"; sourceTree = "<group>"; };
 		DC5CADC51CACF1FF0058A236 /* LSArgumentObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSArgumentObject.m; path = "Modal/Config Object/LSArgumentObject.m"; sourceTree = "<group>"; };
+		DC5CADC81CAD21D80058A236 /* LSTypeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSTypeObject.h; path = "Modal/Type Object/LSTypeObject.h"; sourceTree = "<group>"; };
+		DC5CADC91CAD21D80058A236 /* LSTypeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSTypeObject.m; path = "Modal/Type Object/LSTypeObject.m"; sourceTree = "<group>"; };
+		DC5CADCB1CAD284F0058A236 /* LSFilterObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSFilterObject.h; path = "Modal/Config Object/LSFilterObject.h"; sourceTree = "<group>"; };
+		DC5CADCC1CAD284F0058A236 /* LSFilterObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSFilterObject.m; path = "Modal/Config Object/LSFilterObject.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +215,7 @@
 		DC3C30531CAB6B8D0070BCB1 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
+				DC5CADC71CAD21C10058A236 /* Type Object */,
 				DC3C30871CACB5A40070BCB1 /* File */,
 				DC3C30771CABB1C00070BCB1 /* KeyValuePair */,
 				DC3C306A1CAB957B0070BCB1 /* Config Object */,
@@ -253,6 +260,8 @@
 				DC5CADC51CACF1FF0058A236 /* LSArgumentObject.m */,
 				DC5CADC11CACEE890058A236 /* LSActionObject.h */,
 				DC5CADC21CACEE890058A236 /* LSActionObject.m */,
+				DC5CADCB1CAD284F0058A236 /* LSFilterObject.h */,
+				DC5CADCC1CAD284F0058A236 /* LSFilterObject.m */,
 			);
 			name = "Config Object";
 			sourceTree = "<group>";
@@ -277,8 +286,8 @@
 				DC3C308C1CACB6120070BCB1 /* LSLogFile.m */,
 				DC3C308E1CACB7680070BCB1 /* LSConfigFile.h */,
 				DC3C308F1CACB7680070BCB1 /* LSConfigFile.m */,
-				DC3C30911CACB8EB0070BCB1 /* LSLineFormatFile.h */,
-				DC3C30921CACB8EB0070BCB1 /* LSLineFormatFile.m */,
+				DC3C30911CACB8EB0070BCB1 /* LSEventFormatFile.h */,
+				DC3C30921CACB8EB0070BCB1 /* LSEventFormatFile.m */,
 			);
 			name = File;
 			sourceTree = "<group>";
@@ -290,6 +299,15 @@
 				DC3C30961CACC19D0070BCB1 /* LSXMLHelper.m */,
 			);
 			name = XML;
+			sourceTree = "<group>";
+		};
+		DC5CADC71CAD21C10058A236 /* Type Object */ = {
+			isa = PBXGroup;
+			children = (
+				DC5CADC81CAD21D80058A236 /* LSTypeObject.h */,
+				DC5CADC91CAD21D80058A236 /* LSTypeObject.m */,
+			);
+			name = "Type Object";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -421,7 +439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC3C30931CACB8EB0070BCB1 /* LSLineFormatFile.m in Sources */,
+				DC3C30931CACB8EB0070BCB1 /* LSEventFormatFile.m in Sources */,
 				DC3C304E1CAB6B0B0070BCB1 /* AppDelegate.m in Sources */,
 				DC3C306D1CAB958A0070BCB1 /* LSCaptureObject.m in Sources */,
 				DC3C308D1CACB6120070BCB1 /* LSLogFile.m in Sources */,
@@ -429,6 +447,7 @@
 				DC3C30831CABDE330070BCB1 /* LSEventObject.m in Sources */,
 				DC3C307D1CABB28B0070BCB1 /* LSPairArray.m in Sources */,
 				DC3C308A1CACB5B30070BCB1 /* LSFileBase.m in Sources */,
+				DC5CADCA1CAD21D80058A236 /* LSTypeObject.m in Sources */,
 				DC3C30971CACC19D0070BCB1 /* LSXMLHelper.m in Sources */,
 				DC3C307A1CABB1DC0070BCB1 /* LSPair.m in Sources */,
 				DC3C30701CAB959F0070BCB1 /* LSConfigObject.m in Sources */,
@@ -439,6 +458,7 @@
 				DC3C30231CAB6AB60070BCB1 /* main.m in Sources */,
 				DC3C305B1CAB7C050070BCB1 /* LSException.m in Sources */,
 				DC5CADC61CACF1FF0058A236 /* LSArgumentObject.m in Sources */,
+				DC5CADCD1CAD284F0058A236 /* LSFilterObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,14 +6,13 @@
 //  Copyright © 2016 Gordon Xin. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "LSConfigFile.h"
 
 
-@class LSLineObject;
+@class LSEventObject;
 
 @interface LSLineFormatFile : LSConfigFile
 
-@property (nonatomic, readonly, strong) LSLineObject    *lineObject;
+@property (nonatomic, readonly, strong) LSEventObject    *event;
 
 @end

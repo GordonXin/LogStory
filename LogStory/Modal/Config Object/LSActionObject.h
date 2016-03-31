@@ -6,17 +6,19 @@
 //  Copyright © 2016 Gordon Xin. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "LSConfigObject.h"
 
-NS_ASSUME_NONNULL_BEGIN
+@class LSArgumentObject;
+
+extern NSString * const kLSActionObject;
+
+extern NSString * const kLSActionObjectFunctionkey;
+
 
 @interface LSActionObject : LSConfigObject
 
-@property (nonatomic, readonly, copy)   NSString        *actionName;
+@property (nonatomic, readonly, copy)   NSString                    *function;
 
-@property (nonatomic, readonly, copy)   NSArray         *argList;
+@property (nonatomic, readonly, copy)   NSArray<LSArgumentObject *> *argList;
 
 @end
-
-NS_ASSUME_NONNULL_END
