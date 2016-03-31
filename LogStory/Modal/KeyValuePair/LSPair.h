@@ -10,9 +10,10 @@
 
 @interface LSPair : NSObject
 
-@property (nonatomic, readwrite, copy)   NSString *key;
+@property (nonatomic, readwrite, copy)   NSString       *key;
 
-@property (nonatomic, readwrite, strong) id        value;
+@property (nonatomic, readwrite, strong) id             value;
+
 
 -(instancetype)initWithValue:(id)value forKey:(NSString *)key;
 

@@ -6,17 +6,16 @@
 //  Copyright © 2016 Gordon Xin. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "LSConfigObject.h"
 
-NS_ASSUME_NONNULL_BEGIN
 
 extern NSString * const kLSTimeObject;
 
+extern NSString * const kLSTimeObjectFormatKey;
+
 @interface LSTimeObject : LSConfigObject
 
-@property (nonatomic, readonly, copy) NSString      *formatString;
+@property (nonatomic, readonly, copy)   NSString *format;
 
 @end
 
-NS_ASSUME_NONNULL_END

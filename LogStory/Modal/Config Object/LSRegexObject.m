@@ -9,74 +9,57 @@
 #import "LSRegexObject.h"
 #import "LSCaptureObject.h"
 
-#import "LSError.h"
-#import "LSXMLHelper.h"
-
 NSString * const kLSRegexObject = @"LSRegex";
 
-NSString * const kExpressionKey = @"Expression";
+NSString * const kLSRegexObjectExpressionKey = @"Expression";
+NSString * const kLSRegexObjectCaseKey       = @"CaseSensitive";
 
 @implementation LSRegexObject
 
--(instancetype)initWithElementNode:(NSXMLElement *)element error:(NSError *__autoreleasing *)outError
++(NSString *)nodeName
 {
-    if (self = [super initWithElementNode:element error:outError])
-    {
-        
-    }
-    return self;
+    return kLSRegexObject;
 }
 
--(BOOL)readNode:(NSXMLElement *)element error:(NSError *__autoreleasing *)outError
+-(void)checkAttributes
 {
-    // check
-    if (![element.name isEqualToString:kLSRegexObject])
+    NSString *expr = [self attributeWithKey:kLSRegexObjectExpressionKey proposedClass:[NSString class]];
+    if (![expr length])
     {
-        if (outError)
-        {
-            *outError = [LSError errorFromClass:self.class
-                                       selector:_cmd
-                                         format:@"Initialization failed, because input element with wrong name:%@", element.name];
-        }
-        return NO;
+        self.errorMessage = [NSString stringWithFormat:@"Regex is empty"];
+        return;
     }
     
-    // read <Expression></Expression>
-    NSXMLElement *regexNode = [LSXMLHelper firtElementWithName:kExpressionKey ofParent:element];
-    if (!regexNode)
-    {
-        if (outError)
-        {
-            *outError = [LSError errorFromClass:self.class
-                                       selector:_cmd
-                                         format:@"Initialization failed, because can't find %@ element in input element:%@", kExpressionKey, element.name];
-        }
-        return NO;
-    }
-    _regexString = [regexNode stringValue];
-    if (![_regexString length])
-    {
-        if (outError)
-        {
-            *outError = [LSError errorFromClass:self.class
-                                       selector:_cmd
-                                         format:@"Initialization failed, because %@ value is empty", kExpressionKey];
-        }
-        return NO;
-    }
-    
-    // read <LSCaptureList></LSCaptureList>
-    NSXMLElement *captureNode = [LSXMLHelper firtElementWithName:kLSCaptureObjectList ofParent:element];
-    if (captureNode)
-    {
-        _captureList = [[LSCaptureObjectList alloc] initWithElementNode:element error:outError];
-        if (!_captureList)
-        {
-            return NO;
-        }
-    }
+    _regex = [self generateRegex];
+}
 
-    return YES;
+-(NSRegularExpression *)generateRegex
+{
+    NSString *expr = [self attributeWithKey:kLSRegexObjectExpressionKey proposedClass:[NSString class]];
+    
+    NSRegularExpressionOptions option = 0;
+    NSString *caseSensitive = [self attributeWithKey:kLSRegexObjectCaseKey proposedClass:[NSString class]];
+    if (caseSensitive && ![caseSensitive boolValue])
+    {
+        option |= NSRegularExpressionCaseInsensitive;
+    }
+    
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:expr options:option error:&error];
+    if (!regex)
+    {
+        self.errorMessage = [NSString stringWithFormat:@"Regex fail. %@ reason %@", [error localizedDescription], [error localizedFailureReason]];
+        return nil;
+    }
+    
+    _captureArray = [self attributeArrayWithKey:kLSCaptureObject proposedClass:[LSCaptureObject class]];
+    if ([_captureArray count] > regex.numberOfCaptureGroups)
+    {
+        self.errorMessage = [NSString stringWithFormat:@"Regex "];
+        return nil;
+    }
+    
+    return regex;
 }
 
 @end

@@ -6,7 +6,6 @@
 //  Copyright © 2016 Gordon Xin. All rights reserved.
 //
 
-#import "LSPair.h"
 #import "LSPairArray.h"
 
 @interface LSPairArray ()

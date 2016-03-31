@@ -8,66 +8,25 @@
 
 #import "LSTimeObject.h"
 
-#import "LSError.h"
-#import "LSXMLHelper.h"
-
 NSString * const kLSTimeObject = @"LSTime";
 
-NSString * const kFormatKey = @"Format";
+NSString * const kLSTimeObjectFormatKey = @"Format";
 
 @implementation LSTimeObject
 
--(instancetype)initWithElementNode:(NSXMLElement *)element error:(NSError *__autoreleasing *)outError
++(NSString *)nodeName
 {
-    if (self = [super init])
-    {
-        if (![self readNode:element error:outError])
-        {
-            return nil;
-        }
-    }
-    return self;
+    return kLSTimeObject;
 }
 
--(BOOL)readNode:(NSXMLElement *)element error:(NSError * __autoreleasing *)outError
+-(void)checkAttributes
 {
-    // check
-    if (![element.name isEqualToString:kLSTimeObject])
+    _format = [self attributeWithKey:kLSTimeObjectFormatKey proposedClass:[NSString class]];
+    if (![_format length])
     {
-        if (outError)
-        {
-            *outError = [LSError errorFromClass:self.class
-                                       selector:_cmd
-                                         format:@"Initialization failed, because input element with wrong name:%@", element.name];
-        }
-        return NO;
+        self.errorMessage = [NSString stringWithFormat:@"Time format is empty"];
+        return;
     }
-    
-    // read <Expression></Expression>
-    NSXMLElement *formatNode = [LSXMLHelper firtElementWithName:kFormatKey ofParent:element];
-    if (!formatNode)
-    {
-        if (outError)
-        {
-            *outError = [LSError errorFromClass:self.class
-                                       selector:_cmd
-                                         format:@"Initialization failed, because can't find %@ element in input element:%@", kFormatKey, element.name];
-        }
-        return NO;
-    }
-    _formatString = [formatNode stringValue];
-    if (![_formatString length])
-    {
-        if (outError)
-        {
-            *outError = [LSError errorFromClass:self.class
-                                       selector:_cmd
-                                         format:@"Initialization failed, because %@ value is empty", kFormatKey];
-        }
-        return NO;
-    }
-
-    return YES;
 }
 
 @end

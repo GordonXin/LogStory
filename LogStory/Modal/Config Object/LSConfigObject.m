@@ -8,144 +8,117 @@
 
 #import "LSConfigObject.h"
 
-#import "LSError.h"
-#import "LSException.h"
+@interface LSConfigObject ()
+{
+    LSPairArray *_attributes;
+}
 
-
-#import "LSPairArray.h"
-#import "LSConfigObjectFactory.h"
+@end
 
 @implementation LSConfigObject
 
--(instancetype)init
++(NSString *)nodeName
 {
-    if (self = [super init])
-    {
-        _attributes = [LSPairArray pairArray];
-    }
-    return self;
+    return @"Invalid Node Name";
 }
 
--(instancetype)initWithElementNode:(NSXMLElement *)element error:(NSError *__autoreleasing *)outError;
++(BOOL)isValidElement:(NSXMLElement *)element
 {
-    if (element == nil)
+    if (element && element.name && element.name.length)
     {
-        if (outError)
-        {
-            *outError = [LSError errorFromClass:self.class
-                                       selector:_cmd
-                                         format:@"Initialization failed, because input element is nil"];
-        }
-        return nil;
+        return YES;
+    }
+    return NO;
+}
+
++(id)configObjectWithElement:(NSXMLElement *)element
+{
+    if (element.childCount)
+    {
+    
     }
     
-    if (self = [self init])
-    {
-    }
-    return self;
+    return (element.stringValue) ? element.stringValue : @"";
 }
 
--(instancetype)initWithAttributes:(LSPairArray *)attributes
+-(instancetype)initWithElementNode:(NSXMLElement *)element
 {
     if (self = [self init])
     {
-        _attributes = attributes ? [attributes copy] : [LSPairArray pairArray];
-    }
-    return self;
-}
-
--(NSXMLElement *)element
-{
-    NSXMLElement *node = [NSXMLElement elementWithName:[self elementName]];
-    
-    for (id aValue in _attributes.allValues)
-    {
-        if ([aValue isKindOfClass:[LSConfigObject class]])
-        {
-            NSXMLElement *subNode = [(LSConfigObject *)aValue element];
-            if (subNode)
-            {
-                [node addChild:subNode];
-            }
-        }
-    }
-    
-    return node;
-}
-
--(NSString *)elementName
-{
-    [LSException raise:SELF_OBJ_NAME format:@""];
-    return nil;
-}
-
-@end
-
-
-
-
-
-@implementation LSConfigObjectList
-
--(instancetype)initWithElementNode:(NSXMLElement *)elementNode
-{
-    if (elementNode == nil)
-    {
-        [LSException raise:SELF_OBJ_NAME format:@""];
-        return nil;
-    }
-    
-    if (self = [super init])
-    {
-        _objectList = [NSMutableArray array];
+        _configName = [element.name copy];
         
-        for (NSXMLElement *child in elementNode.children)
+        [self readChildFrom:element];
+        
+        [self checkErrorFromAtrributes];
+        
+        if (![self.errorMessage length])
         {
-            if (child && child.name && [child.name isEqualToString:[self subElementName]])
-            {
-                id obj = [LSConfigObjectFactory configObjectWithElement:child];
-                [_objectList addObject:obj];
-            }
-            else
-            {
-                id obj = [LSConfigObjectFactory configObjectWithElement:child];
-                if (obj)
-                {
-                    //[self.attributes setObject:obj forKey:child.name];
-                }
-            }
+            [self checkAttributes];
         }
     }
     return self;
 }
 
--(instancetype)initWithAttributes:(LSPairArray *)attributes
+-(void)readChildFrom:(NSXMLElement *)element
 {
-    if (self = [super initWithAttributes:attributes])
+    if (element.childCount)
     {
-        _objectList = [NSMutableArray array];
-    }
-    return self;
-}
-
--(instancetype)initWithObjectList:(LSPairArray *)attributes array:(NSMutableArray *)objectList
-{
-    if (self = [super initWithAttributes:attributes])
-    {
-        if (objectList)
+        for (NSXMLElement *child in element.children)
         {
-            _objectList = [objectList copy];
+            if ([LSConfigObject isValidElement:child])
+            {
+                id obj = [LSConfigObject configObjectWithElement:child];
+                [_attributes addPair:[[LSPair alloc] initWithValue:obj forKey:child.name]];
+            }
         }
     }
-    return self;
 }
 
--(NSString *)subElementName
+-(void)checkErrorFromAtrributes
 {
-    [LSException raise:SELF_OBJ_NAME format:@""];
+    for (NSUInteger i = 0; i < [_attributes count]; ++i)
+    {
+        LSPair *pair = [_attributes pairAtIndex:i];
+        id val = [pair value];
+        if ([val isKindOfClass:[LSConfigObject class]] && [[val errorMessage] length])
+        {
+            self.errorMessage = [(LSConfigObject *)val errorMessage];
+        }
+    }
+}
+
+-(void)checkAttributes
+{
+
+}
+
+-(id)attributeWithKey:(NSString *)key proposedClass:(Class)className
+{
+    id obj = [_attributes firstValueForKey:key];
+    if (obj && [obj isKindOfClass:className])
+    {
+        return obj;
+    }
     return nil;
 }
 
-@end
+-(NSArray *)attributeArrayWithKey:(NSString *)key proposedClass:(Class)className
+{
+    NSArray *attrs = [_attributes valuesForKey:key];
+    NSMutableArray *array = [NSMutableArray array];
+    
+    if ([attrs count])
+    {
+        for (id obj in attrs)
+        {
+            if ([obj isKindOfClass:className])
+            {
+                [array addObject:obj];
+            }
+        }
+    }
+    return [NSArray arrayWithArray:array];
+}
 
+@end
 

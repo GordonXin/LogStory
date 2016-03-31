@@ -6,32 +6,31 @@
 //  Copyright © 2016 Gordon Xin. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
-@class LSPairArray;
+#import "LSPairArray.h"
 
 @interface LSConfigObject : NSObject
 
--(instancetype)initWithElementNode:(NSXMLElement *)element error:(NSError *__autoreleasing *)outError;
+//
+//  factory method
+//
++(id)configObjectWithElement:(NSXMLElement *)element;
 
--(instancetype)initWithAttributes:(LSPairArray *)attributes;
+//
+//  init method
+//
 
-@property (nonatomic, readonly, strong) LSPairArray *attributes;
+-(instancetype)initWithElementNode:(NSXMLElement *)element;
 
--(NSXMLElement *)element;
+
+//
+//  property
+//
+@property (nonatomic, readonly,  copy)      NSString     *configName;
+@property (nonatomic, readwrite, copy)      NSString     *errorMessage;
+
+
+-(void)checkAttributes;
+-(id)attributeWithKey:(NSString *)key proposedClass:(Class)className;
+-(NSArray *)attributeArrayWithKey:(NSString *)key proposedClass:(Class)className;
 
 @end
-
-
-
-
-@interface LSConfigObjectList : LSConfigObject
-
--(instancetype)initWithObjectList:(LSPairArray *)attributes array:(NSMutableArray *)objectList;
-
-@property (nonatomic, readonly, strong) NSMutableArray *objectList;
-
--(NSString *)subElementName;
-
-@end
-

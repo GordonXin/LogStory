@@ -19,8 +19,7 @@
 		DC3C30761CABA0300070BCB1 /* LSRegexObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30751CABA0300070BCB1 /* LSRegexObject.m */; };
 		DC3C307A1CABB1DC0070BCB1 /* LSPair.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30791CABB1DC0070BCB1 /* LSPair.m */; };
 		DC3C307D1CABB28B0070BCB1 /* LSPairArray.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C307C1CABB28B0070BCB1 /* LSPairArray.m */; };
-		DC3C30801CABD85B0070BCB1 /* LSConfigObjectFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C307F1CABD85B0070BCB1 /* LSConfigObjectFactory.m */; };
-		DC3C30831CABDE330070BCB1 /* LSLineObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30821CABDE330070BCB1 /* LSLineObject.m */; };
+		DC3C30831CABDE330070BCB1 /* LSEventObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30821CABDE330070BCB1 /* LSEventObject.m */; };
 		DC3C30861CABDF3A0070BCB1 /* LSTimeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30851CABDF3A0070BCB1 /* LSTimeObject.m */; };
 		DC3C308A1CACB5B30070BCB1 /* LSFileBase.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30891CACB5B30070BCB1 /* LSFileBase.m */; };
 		DC3C308D1CACB6120070BCB1 /* LSLogFile.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C308C1CACB6120070BCB1 /* LSLogFile.m */; };
@@ -75,10 +74,8 @@
 		DC3C30791CABB1DC0070BCB1 /* LSPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSPair.m; path = Modal/KeyValuePair/LSPair.m; sourceTree = "<group>"; };
 		DC3C307B1CABB28B0070BCB1 /* LSPairArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSPairArray.h; path = Modal/KeyValuePair/LSPairArray.h; sourceTree = "<group>"; };
 		DC3C307C1CABB28B0070BCB1 /* LSPairArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSPairArray.m; path = Modal/KeyValuePair/LSPairArray.m; sourceTree = "<group>"; };
-		DC3C307E1CABD85B0070BCB1 /* LSConfigObjectFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSConfigObjectFactory.h; path = "Modal/Config Object/LSConfigObjectFactory.h"; sourceTree = "<group>"; };
-		DC3C307F1CABD85B0070BCB1 /* LSConfigObjectFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSConfigObjectFactory.m; path = "Modal/Config Object/LSConfigObjectFactory.m"; sourceTree = "<group>"; };
-		DC3C30811CABDE330070BCB1 /* LSLineObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSLineObject.h; path = "Modal/Config Object/LSLineObject.h"; sourceTree = "<group>"; };
-		DC3C30821CABDE330070BCB1 /* LSLineObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSLineObject.m; path = "Modal/Config Object/LSLineObject.m"; sourceTree = "<group>"; };
+		DC3C30811CABDE330070BCB1 /* LSEventObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSEventObject.h; path = "Modal/Config Object/LSEventObject.h"; sourceTree = "<group>"; };
+		DC3C30821CABDE330070BCB1 /* LSEventObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSEventObject.m; path = "Modal/Config Object/LSEventObject.m"; sourceTree = "<group>"; };
 		DC3C30841CABDF3A0070BCB1 /* LSTimeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSTimeObject.h; path = "Modal/Config Object/LSTimeObject.h"; sourceTree = "<group>"; };
 		DC3C30851CABDF3A0070BCB1 /* LSTimeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSTimeObject.m; path = "Modal/Config Object/LSTimeObject.m"; sourceTree = "<group>"; };
 		DC3C30881CACB5B30070BCB1 /* LSFileBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSFileBase.h; path = Modal/File/LSFileBase.h; sourceTree = "<group>"; };
@@ -244,16 +241,14 @@
 			children = (
 				DC3C306E1CAB959F0070BCB1 /* LSConfigObject.h */,
 				DC3C306F1CAB959F0070BCB1 /* LSConfigObject.m */,
-				DC3C307E1CABD85B0070BCB1 /* LSConfigObjectFactory.h */,
-				DC3C307F1CABD85B0070BCB1 /* LSConfigObjectFactory.m */,
 				DC3C306B1CAB958A0070BCB1 /* LSCaptureObject.h */,
 				DC3C306C1CAB958A0070BCB1 /* LSCaptureObject.m */,
 				DC3C30741CABA0300070BCB1 /* LSRegexObject.h */,
 				DC3C30751CABA0300070BCB1 /* LSRegexObject.m */,
 				DC3C30841CABDF3A0070BCB1 /* LSTimeObject.h */,
 				DC3C30851CABDF3A0070BCB1 /* LSTimeObject.m */,
-				DC3C30811CABDE330070BCB1 /* LSLineObject.h */,
-				DC3C30821CABDE330070BCB1 /* LSLineObject.m */,
+				DC3C30811CABDE330070BCB1 /* LSEventObject.h */,
+				DC3C30821CABDE330070BCB1 /* LSEventObject.m */,
 				DC5CADC41CACF1FF0058A236 /* LSArgumentObject.h */,
 				DC5CADC51CACF1FF0058A236 /* LSArgumentObject.m */,
 				DC5CADC11CACEE890058A236 /* LSActionObject.h */,
@@ -431,12 +426,11 @@
 				DC3C306D1CAB958A0070BCB1 /* LSCaptureObject.m in Sources */,
 				DC3C308D1CACB6120070BCB1 /* LSLogFile.m in Sources */,
 				DC3C30761CABA0300070BCB1 /* LSRegexObject.m in Sources */,
-				DC3C30831CABDE330070BCB1 /* LSLineObject.m in Sources */,
+				DC3C30831CABDE330070BCB1 /* LSEventObject.m in Sources */,
 				DC3C307D1CABB28B0070BCB1 /* LSPairArray.m in Sources */,
 				DC3C308A1CACB5B30070BCB1 /* LSFileBase.m in Sources */,
 				DC3C30971CACC19D0070BCB1 /* LSXMLHelper.m in Sources */,
 				DC3C307A1CABB1DC0070BCB1 /* LSPair.m in Sources */,
-				DC3C30801CABD85B0070BCB1 /* LSConfigObjectFactory.m in Sources */,
 				DC3C30701CAB959F0070BCB1 /* LSConfigObject.m in Sources */,
 				DC3C30901CACB7680070BCB1 /* LSConfigFile.m in Sources */,
 				DC3C30861CABDF3A0070BCB1 /* LSTimeObject.m in Sources */,
