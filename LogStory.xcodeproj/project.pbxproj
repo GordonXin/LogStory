@@ -21,16 +21,20 @@
 		DC3C307D1CABB28B0070BCB1 /* LSPairArray.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C307C1CABB28B0070BCB1 /* LSPairArray.m */; };
 		DC3C30831CABDE330070BCB1 /* LSEventObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30821CABDE330070BCB1 /* LSEventObject.m */; };
 		DC3C30861CABDF3A0070BCB1 /* LSTimeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30851CABDF3A0070BCB1 /* LSTimeObject.m */; };
-		DC3C308A1CACB5B30070BCB1 /* LSFileBase.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30891CACB5B30070BCB1 /* LSFileBase.m */; };
-		DC3C308D1CACB6120070BCB1 /* LSLogFile.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C308C1CACB6120070BCB1 /* LSLogFile.m */; };
-		DC3C30901CACB7680070BCB1 /* LSConfigFile.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C308F1CACB7680070BCB1 /* LSConfigFile.m */; };
-		DC3C30931CACB8EB0070BCB1 /* LSEventFormatFile.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30921CACB8EB0070BCB1 /* LSEventFormatFile.m */; };
 		DC3C30971CACC19D0070BCB1 /* LSXMLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30961CACC19D0070BCB1 /* LSXMLHelper.m */; };
 		DC3C309A1CACC4E90070BCB1 /* LSError.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30991CACC4E90070BCB1 /* LSError.m */; };
 		DC5CADC31CACEE890058A236 /* LSActionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5CADC21CACEE890058A236 /* LSActionObject.m */; };
 		DC5CADC61CACF1FF0058A236 /* LSArgumentObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5CADC51CACF1FF0058A236 /* LSArgumentObject.m */; };
 		DC5CADCA1CAD21D80058A236 /* LSTypeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5CADC91CAD21D80058A236 /* LSTypeObject.m */; };
 		DC5CADCD1CAD284F0058A236 /* LSFilterObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5CADCC1CAD284F0058A236 /* LSFilterObject.m */; };
+		DCC921E01CB34EFF0009681B /* LSConfigFile.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC921D91CB34EFF0009681B /* LSConfigFile.m */; };
+		DCC921E11CB34EFF0009681B /* LSEventFormatFile.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC921DB1CB34EFF0009681B /* LSEventFormatFile.m */; };
+		DCC921E21CB34EFF0009681B /* LSFileBase.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC921DD1CB34EFF0009681B /* LSFileBase.m */; };
+		DCC921E31CB34EFF0009681B /* LSLogFile.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC921DF1CB34EFF0009681B /* LSLogFile.m */; };
+		DCC921E71CB34F4A0009681B /* LSFunctionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC921E61CB34F4A0009681B /* LSFunctionObject.m */; };
+		DCC921EA1CB3506A0009681B /* LSFunctionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC921E91CB3506A0009681B /* LSFunctionManager.m */; };
+		DCC921EF1CB35AD80009681B /* LSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC921EE1CB35AD80009681B /* LSMainViewController.m */; };
+		DCC921F31CB35D770009681B /* LSWorkObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC921F21CB35D770009681B /* LSWorkObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,14 +84,6 @@
 		DC3C30821CABDE330070BCB1 /* LSEventObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSEventObject.m; path = "Modal/Config Object/LSEventObject.m"; sourceTree = "<group>"; };
 		DC3C30841CABDF3A0070BCB1 /* LSTimeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSTimeObject.h; path = "Modal/Config Object/LSTimeObject.h"; sourceTree = "<group>"; };
 		DC3C30851CABDF3A0070BCB1 /* LSTimeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSTimeObject.m; path = "Modal/Config Object/LSTimeObject.m"; sourceTree = "<group>"; };
-		DC3C30881CACB5B30070BCB1 /* LSFileBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSFileBase.h; path = Modal/File/LSFileBase.h; sourceTree = "<group>"; };
-		DC3C30891CACB5B30070BCB1 /* LSFileBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSFileBase.m; path = Modal/File/LSFileBase.m; sourceTree = "<group>"; };
-		DC3C308B1CACB6120070BCB1 /* LSLogFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSLogFile.h; path = Modal/File/LSLogFile.h; sourceTree = "<group>"; };
-		DC3C308C1CACB6120070BCB1 /* LSLogFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSLogFile.m; path = Modal/File/LSLogFile.m; sourceTree = "<group>"; };
-		DC3C308E1CACB7680070BCB1 /* LSConfigFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSConfigFile.h; path = Modal/File/LSConfigFile.h; sourceTree = "<group>"; };
-		DC3C308F1CACB7680070BCB1 /* LSConfigFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSConfigFile.m; path = Modal/File/LSConfigFile.m; sourceTree = "<group>"; };
-		DC3C30911CACB8EB0070BCB1 /* LSEventFormatFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSEventFormatFile.h; path = Modal/File/LSEventFormatFile.h; sourceTree = "<group>"; };
-		DC3C30921CACB8EB0070BCB1 /* LSEventFormatFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSEventFormatFile.m; path = Modal/File/LSEventFormatFile.m; sourceTree = "<group>"; };
 		DC3C30951CACC19D0070BCB1 /* LSXMLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSXMLHelper.h; path = Utility/XML/LSXMLHelper.h; sourceTree = "<group>"; };
 		DC3C30961CACC19D0070BCB1 /* LSXMLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSXMLHelper.m; path = Utility/XML/LSXMLHelper.m; sourceTree = "<group>"; };
 		DC3C30981CACC4E90070BCB1 /* LSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSError.h; path = Utility/Exception/LSError.h; sourceTree = "<group>"; };
@@ -100,6 +96,22 @@
 		DC5CADC91CAD21D80058A236 /* LSTypeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSTypeObject.m; path = "Modal/Type Object/LSTypeObject.m"; sourceTree = "<group>"; };
 		DC5CADCB1CAD284F0058A236 /* LSFilterObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSFilterObject.h; path = "Modal/Config Object/LSFilterObject.h"; sourceTree = "<group>"; };
 		DC5CADCC1CAD284F0058A236 /* LSFilterObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSFilterObject.m; path = "Modal/Config Object/LSFilterObject.m"; sourceTree = "<group>"; };
+		DCC921D81CB34EFF0009681B /* LSConfigFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSConfigFile.h; path = "Modal/File Object/LSConfigFile.h"; sourceTree = "<group>"; };
+		DCC921D91CB34EFF0009681B /* LSConfigFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSConfigFile.m; path = "Modal/File Object/LSConfigFile.m"; sourceTree = "<group>"; };
+		DCC921DA1CB34EFF0009681B /* LSEventFormatFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSEventFormatFile.h; path = "Modal/File Object/LSEventFormatFile.h"; sourceTree = "<group>"; };
+		DCC921DB1CB34EFF0009681B /* LSEventFormatFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSEventFormatFile.m; path = "Modal/File Object/LSEventFormatFile.m"; sourceTree = "<group>"; };
+		DCC921DC1CB34EFF0009681B /* LSFileBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSFileBase.h; path = "Modal/File Object/LSFileBase.h"; sourceTree = "<group>"; };
+		DCC921DD1CB34EFF0009681B /* LSFileBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSFileBase.m; path = "Modal/File Object/LSFileBase.m"; sourceTree = "<group>"; };
+		DCC921DE1CB34EFF0009681B /* LSLogFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSLogFile.h; path = "Modal/File Object/LSLogFile.h"; sourceTree = "<group>"; };
+		DCC921DF1CB34EFF0009681B /* LSLogFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSLogFile.m; path = "Modal/File Object/LSLogFile.m"; sourceTree = "<group>"; };
+		DCC921E51CB34F4A0009681B /* LSFunctionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSFunctionObject.h; path = "Modal/Function Object/LSFunctionObject.h"; sourceTree = "<group>"; };
+		DCC921E61CB34F4A0009681B /* LSFunctionObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSFunctionObject.m; path = "Modal/Function Object/LSFunctionObject.m"; sourceTree = "<group>"; };
+		DCC921E81CB3506A0009681B /* LSFunctionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSFunctionManager.h; path = "Modal/Function Object/LSFunctionManager.h"; sourceTree = "<group>"; };
+		DCC921E91CB3506A0009681B /* LSFunctionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSFunctionManager.m; path = "Modal/Function Object/LSFunctionManager.m"; sourceTree = "<group>"; };
+		DCC921ED1CB35AD80009681B /* LSMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSMainViewController.h; path = "Controller/View Controller/LSMainViewController.h"; sourceTree = "<group>"; };
+		DCC921EE1CB35AD80009681B /* LSMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSMainViewController.m; path = "Controller/View Controller/LSMainViewController.m"; sourceTree = "<group>"; };
+		DCC921F11CB35D770009681B /* LSWorkObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSWorkObject.h; path = "Modal/Work Object/LSWorkObject.h"; sourceTree = "<group>"; };
+		DCC921F21CB35D770009681B /* LSWorkObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSWorkObject.m; path = "Modal/Work Object/LSWorkObject.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +162,7 @@
 		DC3C301D1CAB6AB60070BCB1 /* LogStory */ = {
 			isa = PBXGroup;
 			children = (
+				DCC921EB1CB35AB80009681B /* Controller */,
 				DC3C30571CAB7BEC0070BCB1 /* Utility */,
 				DC3C30531CAB6B8D0070BCB1 /* Modal */,
 				DC3C304B1CAB6B000070BCB1 /* App Delegate */,
@@ -215,10 +228,12 @@
 		DC3C30531CAB6B8D0070BCB1 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
-				DC5CADC71CAD21C10058A236 /* Type Object */,
-				DC3C30871CACB5A40070BCB1 /* File */,
 				DC3C30771CABB1C00070BCB1 /* KeyValuePair */,
 				DC3C306A1CAB957B0070BCB1 /* Config Object */,
+				DC5CADC71CAD21C10058A236 /* Type Object */,
+				DC3C30871CACB5A40070BCB1 /* File Object */,
+				DCC921E41CB34F330009681B /* Function Object */,
+				DCC921F01CB35D5D0009681B /* Work Object */,
 			);
 			name = Modal;
 			sourceTree = "<group>";
@@ -277,19 +292,19 @@
 			name = KeyValuePair;
 			sourceTree = "<group>";
 		};
-		DC3C30871CACB5A40070BCB1 /* File */ = {
+		DC3C30871CACB5A40070BCB1 /* File Object */ = {
 			isa = PBXGroup;
 			children = (
-				DC3C30881CACB5B30070BCB1 /* LSFileBase.h */,
-				DC3C30891CACB5B30070BCB1 /* LSFileBase.m */,
-				DC3C308B1CACB6120070BCB1 /* LSLogFile.h */,
-				DC3C308C1CACB6120070BCB1 /* LSLogFile.m */,
-				DC3C308E1CACB7680070BCB1 /* LSConfigFile.h */,
-				DC3C308F1CACB7680070BCB1 /* LSConfigFile.m */,
-				DC3C30911CACB8EB0070BCB1 /* LSEventFormatFile.h */,
-				DC3C30921CACB8EB0070BCB1 /* LSEventFormatFile.m */,
+				DCC921DC1CB34EFF0009681B /* LSFileBase.h */,
+				DCC921DD1CB34EFF0009681B /* LSFileBase.m */,
+				DCC921DE1CB34EFF0009681B /* LSLogFile.h */,
+				DCC921DF1CB34EFF0009681B /* LSLogFile.m */,
+				DCC921D81CB34EFF0009681B /* LSConfigFile.h */,
+				DCC921D91CB34EFF0009681B /* LSConfigFile.m */,
+				DCC921DA1CB34EFF0009681B /* LSEventFormatFile.h */,
+				DCC921DB1CB34EFF0009681B /* LSEventFormatFile.m */,
 			);
-			name = File;
+			name = "File Object";
 			sourceTree = "<group>";
 		};
 		DC3C30941CACC1880070BCB1 /* XML */ = {
@@ -308,6 +323,43 @@
 				DC5CADC91CAD21D80058A236 /* LSTypeObject.m */,
 			);
 			name = "Type Object";
+			sourceTree = "<group>";
+		};
+		DCC921E41CB34F330009681B /* Function Object */ = {
+			isa = PBXGroup;
+			children = (
+				DCC921E51CB34F4A0009681B /* LSFunctionObject.h */,
+				DCC921E61CB34F4A0009681B /* LSFunctionObject.m */,
+				DCC921E81CB3506A0009681B /* LSFunctionManager.h */,
+				DCC921E91CB3506A0009681B /* LSFunctionManager.m */,
+			);
+			name = "Function Object";
+			sourceTree = "<group>";
+		};
+		DCC921EB1CB35AB80009681B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DCC921EC1CB35ABE0009681B /* View Controller */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		DCC921EC1CB35ABE0009681B /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DCC921ED1CB35AD80009681B /* LSMainViewController.h */,
+				DCC921EE1CB35AD80009681B /* LSMainViewController.m */,
+			);
+			name = "View Controller";
+			sourceTree = "<group>";
+		};
+		DCC921F01CB35D5D0009681B /* Work Object */ = {
+			isa = PBXGroup;
+			children = (
+				DCC921F11CB35D770009681B /* LSWorkObject.h */,
+				DCC921F21CB35D770009681B /* LSWorkObject.m */,
+			);
+			name = "Work Object";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -439,23 +491,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC3C30931CACB8EB0070BCB1 /* LSEventFormatFile.m in Sources */,
 				DC3C304E1CAB6B0B0070BCB1 /* AppDelegate.m in Sources */,
+				DCC921E21CB34EFF0009681B /* LSFileBase.m in Sources */,
 				DC3C306D1CAB958A0070BCB1 /* LSCaptureObject.m in Sources */,
-				DC3C308D1CACB6120070BCB1 /* LSLogFile.m in Sources */,
 				DC3C30761CABA0300070BCB1 /* LSRegexObject.m in Sources */,
 				DC3C30831CABDE330070BCB1 /* LSEventObject.m in Sources */,
 				DC3C307D1CABB28B0070BCB1 /* LSPairArray.m in Sources */,
-				DC3C308A1CACB5B30070BCB1 /* LSFileBase.m in Sources */,
+				DCC921E71CB34F4A0009681B /* LSFunctionObject.m in Sources */,
 				DC5CADCA1CAD21D80058A236 /* LSTypeObject.m in Sources */,
+				DCC921EF1CB35AD80009681B /* LSMainViewController.m in Sources */,
+				DCC921E31CB34EFF0009681B /* LSLogFile.m in Sources */,
+				DCC921E11CB34EFF0009681B /* LSEventFormatFile.m in Sources */,
 				DC3C30971CACC19D0070BCB1 /* LSXMLHelper.m in Sources */,
 				DC3C307A1CABB1DC0070BCB1 /* LSPair.m in Sources */,
+				DCC921EA1CB3506A0009681B /* LSFunctionManager.m in Sources */,
 				DC3C30701CAB959F0070BCB1 /* LSConfigObject.m in Sources */,
-				DC3C30901CACB7680070BCB1 /* LSConfigFile.m in Sources */,
 				DC3C30861CABDF3A0070BCB1 /* LSTimeObject.m in Sources */,
 				DC3C309A1CACC4E90070BCB1 /* LSError.m in Sources */,
 				DC5CADC31CACEE890058A236 /* LSActionObject.m in Sources */,
+				DCC921F31CB35D770009681B /* LSWorkObject.m in Sources */,
 				DC3C30231CAB6AB60070BCB1 /* main.m in Sources */,
+				DCC921E01CB34EFF0009681B /* LSConfigFile.m in Sources */,
 				DC3C305B1CAB7C050070BCB1 /* LSException.m in Sources */,
 				DC5CADC61CACF1FF0058A236 /* LSArgumentObject.m in Sources */,
 				DC5CADCD1CAD284F0058A236 /* LSFilterObject.m in Sources */,

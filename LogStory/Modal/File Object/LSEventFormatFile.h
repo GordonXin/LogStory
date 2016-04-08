@@ -11,7 +11,7 @@
 
 @class LSEventObject;
 
-@interface LSLineFormatFile : LSConfigFile
+@interface LSEventFormatFile : LSConfigFile
 
 @property (nonatomic, readonly, strong) LSEventObject    *event;
 

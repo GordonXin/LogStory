@@ -20,4 +20,6 @@ extern NSString * const kLSRegexObjectExpressionKey;
 
 @property (nonatomic, readonly, strong) NSArray<LSCaptureObject *> *captureArray;
 
+-(NSDictionary *)matchOnString:(NSString *)string range:(NSRange)range;
+
 @end

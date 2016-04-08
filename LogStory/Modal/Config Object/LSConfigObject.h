@@ -7,31 +7,24 @@
 //
 
 #import "LSPairArray.h"
+#import "LSXMLHelper.h"
 
 
 @interface LSConfigObject : NSObject
 
-//
-//  factory method
-//
-+(id)configObjectWithElement:(NSXMLElement *)element;
++(BOOL)isValidElement:(NSXMLElement *)element;
+
 
 //
 //  init method
 //
-
 -(instancetype)initWithElementNode:(NSXMLElement *)element;
 
 
 //
 //  property
 //
-@property (nonatomic, readonly,  copy)      NSString     *configName;
 @property (nonatomic, readwrite, copy)      NSString     *errorMessage;
-
-
--(void)checkAttributes;
--(id)attributeWithKey:(NSString *)key proposedClass:(Class)className;
--(NSArray *)attributeArrayWithKey:(NSString *)key proposedClass:(Class)className;
+@property (nonatomic, readonly, strong)     NSXMLElement *elementSelf;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "LSCaptureObject.h"
 #import "LSTypeObject.h"
+#import "LSXMLHelper.h"
 
 NSString * const kLSCaptureObject           = @"LSCapture";
 
@@ -16,47 +17,47 @@ NSString * const kLSCaptureObjectTypeKey    = @"Type";
 
 @implementation LSCaptureObject
 
-+(NSString *)nodeName
++(NSString *)elementName
 {
     return kLSCaptureObject;
 }
 
-+(LSCaptureObject *)captureObjecWithName:(NSString *)name inArray:(NSArray<LSCaptureObject *>*)array
+-(instancetype)initWithElementNode:(NSXMLElement *)element
 {
-    if ([array count])
+    if (self = [super initWithElementNode:element])
     {
-        for (LSCaptureObject *obj in array)
+        if (![self.errorMessage length])
         {
-            if ([[obj name] isEqualToString:name])
-            {
-                return obj;
-            }
+            [self checkAttributes];
         }
     }
-    return nil;
+    return self;
 }
 
--(void)checkAttributes
+-(BOOL)checkAttributes
 {
-    _name = (NSString *)[self attributeWithKey:kLSCaptureObjectNameKey proposedClass:[NSString class]];
-    if(![_name length])
+    NSXMLElement *elementName = [LSXMLHelper firtElementWithName:kLSCaptureObjectNameKey ofParent:self.elementSelf];
+    if (![LSConfigObject isValidElement:elementName])
     {
-        self.errorMessage = [NSString stringWithFormat:@"Capture name is empty"];
-        return;
+        self.errorMessage = [NSString stringWithFormat:@"[Capture] name is empty"];
+        return NO;
     }
+    _name = [elementName.stringValue copy];
     
-    _type = (NSString *)[self attributeWithKey:kLSCaptureObjectTypeKey proposedClass:[NSString class]];
-    if (![_type length])
+    NSXMLElement *elementType = [LSXMLHelper firtElementWithName:kLSCaptureObjectTypeKey ofParent:self.elementSelf];
+    if (![LSConfigObject isValidElement:elementType])
     {
-        self.errorMessage = [NSString stringWithFormat:@"Capture type is empty"];
-        return;
+        self.errorMessage = [NSString stringWithFormat:@"[Capture] type is empty"];
+        return NO;
     }
+    _type = [elementType.stringValue copy];
     
     if ([LSTypeObject isSupportedType:_type])
     {
-        self.errorMessage = [NSString stringWithFormat:@"Capture type %@ is not supported", _type];
-        return;
+        self.errorMessage = [NSString stringWithFormat:@"[Capture] type %@ is not supported", _type];
+        return NO;
     }
+    return YES;
 }
 
 @end

@@ -9,7 +9,7 @@
 #import "LSEventFormatFile.h"
 #import "LSEventObject.h"
 
-@implementation LSLineFormatFile
+@implementation LSEventFormatFile
 
 -(instancetype)initWithURL:(NSURL *)fileURL
 {

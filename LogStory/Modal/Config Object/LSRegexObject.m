@@ -16,52 +16,83 @@ NSString * const kLSRegexObjectCaseKey       = @"CaseSensitive";
 
 @implementation LSRegexObject
 
-+(NSString *)nodeName
++(NSString *)elementName
 {
     return kLSRegexObject;
 }
 
--(void)checkAttributes
+-(instancetype)initWithElementNode:(NSXMLElement *)element
 {
-    NSString *expr = [self attributeWithKey:kLSRegexObjectExpressionKey proposedClass:[NSString class]];
-    if (![expr length])
+    if (self = [super initWithElementNode:element])
     {
-        self.errorMessage = [NSString stringWithFormat:@"Regex is empty"];
-        return;
+        if (![self.errorMessage length])
+        {
+            [self checkAttributes];
+        }
     }
-    
-    _captureArray = [self attributeArrayWithKey:kLSCaptureObject proposedClass:[LSCaptureObject class]];
-    
-    _regex = [self generateRegex];
+    return self;
 }
 
--(NSRegularExpression *)generateRegex
+-(BOOL)checkAttributes
 {
-    NSString *expr = [self attributeWithKey:kLSRegexObjectExpressionKey proposedClass:[NSString class]];
+    // read expression
+    NSXMLElement *elementExpr = [LSXMLHelper firtElementWithName:kLSRegexObjectExpressionKey ofParent:self.elementSelf];
+    if (![LSConfigObject isValidElement:elementExpr])
+    {
+        self.errorMessage = [NSString stringWithFormat:@"[Regex] expression is empty"];
+        return NO;
+    }
+    NSString *expr = [elementExpr.stringValue copy];
     
+    // read case sensitive
+    NSXMLElement *elementCase = [LSXMLHelper firtElementWithName:kLSRegexObjectCaseKey ofParent:self.elementSelf];
+    NSString *stringCase = @"";
+    if ([LSConfigObject isValidElement:elementCase])
+    {
+        stringCase = [elementCase.stringValue copy];
+    }
     NSRegularExpressionOptions option = 0;
-    NSString *caseSensitive = [self attributeWithKey:kLSRegexObjectCaseKey proposedClass:[NSString class]];
-    if (caseSensitive && ![caseSensitive boolValue])
+    if (![stringCase boolValue])
     {
         option |= NSRegularExpressionCaseInsensitive;
     }
     
-    NSError *error = nil;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:expr options:option error:&error];
-    if (!regex)
+    // read captures
+    NSArray *elementsCapture = [self.elementSelf elementsForName:kLSCaptureObject];
+    NSMutableArray *arrayCapture = [NSMutableArray array];
+    for (NSXMLElement *aCapture in elementsCapture)
     {
-        self.errorMessage = [NSString stringWithFormat:@"Regex fail. %@ reason %@", [error localizedDescription], [error localizedFailureReason]];
-        return nil;
+        LSCaptureObject *obj = [[LSCaptureObject alloc] initWithElementNode:aCapture];
+        if ([obj errorMessage])
+        {
+            self.errorMessage = [obj.errorMessage copy];
+            return NO;
+        }
+        [arrayCapture addObject:obj];
+    }
+    _captureArray = [NSArray arrayWithArray:arrayCapture];
+    
+    // generate NSRegularExpression
+    NSError *outError = nil;
+    NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:expr options:option error:&outError];
+    if (regex == nil)
+    {
+        self.errorMessage = [NSString stringWithFormat:@"[Regex] %@ due to %@", outError.localizedDescription, outError.localizedFailureReason];
+        return NO;
+    }
+    if (_captureArray.count > regex.numberOfCaptureGroups)
+    {
+        self.errorMessage = [NSString stringWithFormat:@"[Regex] capture count exceed that in expression"];
+        return NO;
     }
     
-    _captureArray = [self attributeArrayWithKey:kLSCaptureObject proposedClass:[LSCaptureObject class]];
-    if ([_captureArray count] > regex.numberOfCaptureGroups)
-    {
-        self.errorMessage = [NSString stringWithFormat:@"Regex "];
-        return nil;
-    }
+    _regex = regex;
+    return YES;
+}
+
+-(NSDictionary *)matchOnString:(NSString *)string range:(NSRange)range
+{
     
-    return regex;
 }
 
 @end
