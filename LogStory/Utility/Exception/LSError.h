@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+#define LS_ERROR(inFormat...) \
+    [LSError errorFromClass:[self class] selector:_cmd format:inFormat];
+
 @interface LSError : NSError
 
 +(id)errorFromClass:(Class)className selector:(SEL)selector description:(NSString *)description;
