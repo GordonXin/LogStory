@@ -30,6 +30,7 @@
 		DC3C309A1CACC4E90070BCB1 /* LSError.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3C30991CACC4E90070BCB1 /* LSError.m */; };
 		DC5CADC31CACEE890058A236 /* LSActionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5CADC21CACEE890058A236 /* LSActionObject.m */; };
 		DC5CADC61CACF1FF0058A236 /* LSArgumentObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5CADC51CACF1FF0058A236 /* LSArgumentObject.m */; };
+		DC9C53721CC76766004AD0E7 /* LSLog.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9C53711CC76766004AD0E7 /* LSLog.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,8 @@
 		DC5CADC21CACEE890058A236 /* LSActionObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSActionObject.m; path = "Modal/Config Object/LSActionObject.m"; sourceTree = "<group>"; };
 		DC5CADC41CACF1FF0058A236 /* LSArgumentObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSArgumentObject.h; path = "Modal/Config Object/LSArgumentObject.h"; sourceTree = "<group>"; };
 		DC5CADC51CACF1FF0058A236 /* LSArgumentObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSArgumentObject.m; path = "Modal/Config Object/LSArgumentObject.m"; sourceTree = "<group>"; };
+		DC9C53701CC76766004AD0E7 /* LSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSLog.h; path = Utility/Log/LSLog.h; sourceTree = "<group>"; };
+		DC9C53711CC76766004AD0E7 /* LSLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSLog.m; path = Utility/Log/LSLog.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +225,7 @@
 		DC3C30571CAB7BEC0070BCB1 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				DC9C536F1CC714AC004AD0E7 /* Log */,
 				DC3C30941CACC1880070BCB1 /* XML */,
 				DC3C30581CAB7BF10070BCB1 /* Exception */,
 			);
@@ -295,6 +299,15 @@
 				DC3C30961CACC19D0070BCB1 /* LSXMLHelper.m */,
 			);
 			name = XML;
+			sourceTree = "<group>";
+		};
+		DC9C536F1CC714AC004AD0E7 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				DC9C53701CC76766004AD0E7 /* LSLog.h */,
+				DC9C53711CC76766004AD0E7 /* LSLog.m */,
+			);
+			name = Log;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,6 +442,7 @@
 				DC3C30931CACB8EB0070BCB1 /* LSLineFormatFile.m in Sources */,
 				DC3C304E1CAB6B0B0070BCB1 /* AppDelegate.m in Sources */,
 				DC3C306D1CAB958A0070BCB1 /* LSCaptureObject.m in Sources */,
+				DC9C53721CC76766004AD0E7 /* LSLog.m in Sources */,
 				DC3C308D1CACB6120070BCB1 /* LSLogFile.m in Sources */,
 				DC3C30761CABA0300070BCB1 /* LSRegexObject.m in Sources */,
 				DC3C30831CABDE330070BCB1 /* LSLineObject.m in Sources */,

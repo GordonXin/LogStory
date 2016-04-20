@@ -8,10 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+#define RETURN_OUT_ERROR(inFormat...) \
+if (outError) \
+{ \
+    *outError = [LSError errorFromClass:NSStringFromClass([self Class]) selector:NSStringFromSelector(_cmd) format:inFormat]; \
+}
+
 @interface LSError : NSError
 
-+(id)errorFromClass:(Class)className selector:(SEL)selector description:(NSString *)description;
-+(id)errorFromClass:(Class)className selector:(SEL)selector format:(NSString *)format, ... NS_FORMAT_FUNCTION(3,4);
-+(id)errorFromClass:(Class)className selector:(SEL)selector format:(NSString *)format arguments:(va_list)argList  NS_FORMAT_FUNCTION(3,0);
++(id)errorFromClass:(NSString *)className selector:(NSString *)selector format:(NSString *)format, ... NS_FORMAT_FUNCTION(3,4);
 
 @end

@@ -7,17 +7,23 @@
 //
 
 #import "LSException.h"
+#import "LSLog.h"
 
 @implementation LSException
 
-+ (void)raise:(NSString *)name format:(NSString *)format, ... NS_FORMAT_FUNCTION(2,3)
++ (void)raiseFromClass:(NSString *)className selector:(NSString *)selectorName format:(NSString *)format, ...
 {
-
-}
-
-+ (void)raise:(NSString *)name format:(NSString *)format arguments:(va_list)argList NS_FORMAT_FUNCTION(2,0)
-{
-
+    va_list ap;
+    va_start(ap, format);
+    NSString *reason = [[NSString alloc] initWithFormat:format arguments:ap];
+    [LSLog logErrorWithClassName:className selector:selectorName messageFormat:@"Raise exception because: %@", reason];
+    
+    LSException *exp = [[LSException alloc] initWithName:@"LSExcpetion"
+                                                  reason:reason
+                                                userInfo:nil];
+    va_end(ap);
+    
+    [exp raise];
 }
 
 @end

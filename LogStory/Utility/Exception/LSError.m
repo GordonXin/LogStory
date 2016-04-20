@@ -7,6 +7,7 @@
 //
 
 #import "LSError.h"
+#import "LSLog.h"
 
 NSString * const kLSErrorDomain         = @"LogStory.Error.Domain";
 
@@ -18,34 +19,27 @@ NSString * const kLSErrorSelectorKey    = @"selector";
 
 @implementation LSError
 
-+(id)errorFromClass:(Class)className selector:(SEL)selector description:(NSString *)description
++(id)errorFromClass:(NSString *)className selector:(NSString *)selector description:(NSString *)description
 {
     NSDictionary *userInfo = @{
-                               kLSErrorClassKey             : NSStringFromClass(className),
-                               kLSErrorSelectorKey          : NSStringFromSelector(selector),
+                               kLSErrorClassKey             : className,
+                               kLSErrorSelectorKey          : selector,
                                NSLocalizedDescriptionKey    : description,
                                };
+    
+    [LSLog logErrorWithClassName:className selector:selector messageFormat:@"Return Error because: %@", description];
     
     return [[LSError alloc] initWithDomain:kLSErrorDomain
                                       code:kLSErrorCodeDefaut
                                   userInfo:userInfo];
 }
 
-+(id)errorFromClass:(Class)className selector:(SEL)selector format:(NSString *)format, ...
++(id)errorFromClass:(NSString *)className selector:(NSString *)selector format:(NSString *)format, ...
 {
     va_list ap;
     va_start(ap, format);
     NSString *description = [[NSString alloc] initWithFormat:format arguments:ap];
     va_end(ap);
-    
-    return [LSError errorFromClass:className
-                          selector:selector
-                       description:description];
-}
-
-+(id)errorFromClass:(Class)className selector:(SEL)selector format:(NSString *)format arguments:(va_list)argList
-{
-    NSString *description = [[NSString alloc] initWithFormat:format arguments:argList];
     
     return [LSError errorFromClass:className
                           selector:selector

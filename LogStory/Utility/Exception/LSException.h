@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-#define SELF_OBJ_NAME NSStringFromClass([self class])
+#define RAISE_EXCEPTION(inFormat...) \
+[LSException raiseFromClass:NSStringFromClass([self Class]) selector:NSStringFromSelector(_cmd), inFormat]; \
 
 @interface LSException : NSException
 
-+ (void)raise:(NSString *)name format:(NSString *)format, ... NS_FORMAT_FUNCTION(2,3);
-+ (void)raise:(NSString *)name format:(NSString *)format arguments:(va_list)argList NS_FORMAT_FUNCTION(2,0);
++ (void)raiseFromClass:(NSString *)className selector:(NSString *)selectorName format:(NSString *)format, ... NS_FORMAT_FUNCTION(3,4);
 
 @end
