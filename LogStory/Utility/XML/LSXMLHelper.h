@@ -10,6 +10,12 @@
 
 @interface LSXMLHelper : NSObject
 
-+(nullable NSXMLElement *)firtElementWithName:(nonnull NSString *)name ofParent:(nonnull NSXMLElement *)parent;
+// get node
++(NSInteger)numberOfElementWithName:(NSString *)name ofParent:(NSXMLElement *)parent;
++(NSXMLElement *)firtElementWithName:(NSString *)name ofParent:(NSXMLElement *)parent;
++(NSXMLElement *)elementWithName:(NSString *)name atIndex:(NSInteger)index ofParent:(NSXMLElement *)parent;
+
+// get stringValue
++(NSString *)stringValueOfElementWithName:(NSString *)name atIndex:(NSInteger)index ofParent:(NSXMLElement *)parent;
 
 @end
