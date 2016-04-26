@@ -112,6 +112,18 @@
     return nil;
 }
 
+-(LSPair *)firstPairWithKey:(NSString *)key
+{
+    for (LSPair *pair in _pairArray)
+    {
+        if ([pair.key isEqualToString:key])
+        {
+            return pair;
+        }
+    }
+    return nil;
+}
+
 -(LSPair *)pairAtIndex:(NSUInteger)index
 {
     if (index < _pairArray.count)
@@ -128,6 +140,11 @@
 
 -(void)addPair:(LSPair *)pair
 {
+    if (![pair.key length] || !pair.value)
+    {
+        return;
+    }
+    
     if (![_pairArray containsObject:pair])
     {
         [_pairArray addObject:pair];

@@ -25,21 +25,21 @@
 
 -(LSPairArray *)copy;
 
-
 #pragma mark -
 #pragma mark        data access
 #pragma mark -
 
--(NSArray<LSPair *> *)pairsForKey:(NSString *)key;
--(NSArray<id> *)valuesForKey:(NSString *)key;
--(id)firstValueForKey:(NSString *)key;
--(LSPair *)pairAtIndex:(NSUInteger)index;
--(NSUInteger)count;
+-(NSArray<LSPair *> *) pairsForKey:(NSString *)key;
+-(NSArray<id> *)       valuesForKey:(NSString *)key;
+-(id)                  firstValueForKey:(NSString *)key;
+-(LSPair *)            firstPairWithKey:(NSString *)key;
+-(LSPair *)            pairAtIndex:(NSUInteger)index;
+-(NSUInteger)          count;
 
--(void)addPair:(LSPair *)pair;
--(void)removePair:(LSPair *)pair;
+-(void)                addPair:(LSPair *)pair;
+-(void)                removePair:(LSPair *)pair;
 
--(NSArray<NSString *> *)allKeys;
--(NSArray<id> *)allValues;
+-(NSArray<NSString *> *) allKeys;
+-(NSArray<id> *)         allValues;
 
 @end

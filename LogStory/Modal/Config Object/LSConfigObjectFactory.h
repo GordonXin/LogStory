@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LSPair.h"
 
 @interface LSConfigObjectFactory : NSObject
 
-+(id)configObjectWithElement:(NSXMLElement *)element;
++(LSPair *)configObjectWithElement:(NSXMLElement *)element;
 
 @end

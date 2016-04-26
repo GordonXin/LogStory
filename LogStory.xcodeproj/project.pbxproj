@@ -31,6 +31,11 @@
 		DC5CADC31CACEE890058A236 /* LSActionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5CADC21CACEE890058A236 /* LSActionObject.m */; };
 		DC5CADC61CACF1FF0058A236 /* LSArgumentObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5CADC51CACF1FF0058A236 /* LSArgumentObject.m */; };
 		DC9C53721CC76766004AD0E7 /* LSLog.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9C53711CC76766004AD0E7 /* LSLog.m */; };
+		DC9C53771CCDD89C004AD0E7 /* LSProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9C53761CCDD89C004AD0E7 /* LSProperty.m */; };
+		DC9C537A1CCDD955004AD0E7 /* LSCaptureProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9C53791CCDD955004AD0E7 /* LSCaptureProperty.m */; };
+		DC9C537D1CCDDDD8004AD0E7 /* LSRegexProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9C537C1CCDDDD8004AD0E7 /* LSRegexProperty.m */; };
+		DC9C53811CCDE571004AD0E7 /* LSCaptureResult.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9C53801CCDE571004AD0E7 /* LSCaptureResult.m */; };
+		DC9C53841CCDE792004AD0E7 /* LSRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9C53831CCDE792004AD0E7 /* LSRegex.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +105,16 @@
 		DC5CADC51CACF1FF0058A236 /* LSArgumentObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSArgumentObject.m; path = "Modal/Config Object/LSArgumentObject.m"; sourceTree = "<group>"; };
 		DC9C53701CC76766004AD0E7 /* LSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSLog.h; path = Utility/Log/LSLog.h; sourceTree = "<group>"; };
 		DC9C53711CC76766004AD0E7 /* LSLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSLog.m; path = Utility/Log/LSLog.m; sourceTree = "<group>"; };
+		DC9C53751CCDD89C004AD0E7 /* LSProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSProperty.h; path = Model/Property/LSProperty.h; sourceTree = "<group>"; };
+		DC9C53761CCDD89C004AD0E7 /* LSProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSProperty.m; path = Model/Property/LSProperty.m; sourceTree = "<group>"; };
+		DC9C53781CCDD955004AD0E7 /* LSCaptureProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSCaptureProperty.h; path = Model/Property/LSCaptureProperty.h; sourceTree = "<group>"; };
+		DC9C53791CCDD955004AD0E7 /* LSCaptureProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSCaptureProperty.m; path = Model/Property/LSCaptureProperty.m; sourceTree = "<group>"; };
+		DC9C537B1CCDDDD8004AD0E7 /* LSRegexProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSRegexProperty.h; path = Model/Property/LSRegexProperty.h; sourceTree = "<group>"; };
+		DC9C537C1CCDDDD8004AD0E7 /* LSRegexProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSRegexProperty.m; path = Model/Property/LSRegexProperty.m; sourceTree = "<group>"; };
+		DC9C537F1CCDE571004AD0E7 /* LSCaptureResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSCaptureResult.h; path = Model/Regex/LSCaptureResult.h; sourceTree = "<group>"; };
+		DC9C53801CCDE571004AD0E7 /* LSCaptureResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSCaptureResult.m; path = Model/Regex/LSCaptureResult.m; sourceTree = "<group>"; };
+		DC9C53821CCDE792004AD0E7 /* LSRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LSRegex.h; path = Model/Regex/LSRegex.h; sourceTree = "<group>"; };
+		DC9C53831CCDE792004AD0E7 /* LSRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LSRegex.m; path = Model/Regex/LSRegex.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +165,7 @@
 		DC3C301D1CAB6AB60070BCB1 /* LogStory */ = {
 			isa = PBXGroup;
 			children = (
+				DC9C53731CCDD878004AD0E7 /* Model */,
 				DC3C30571CAB7BEC0070BCB1 /* Utility */,
 				DC3C30531CAB6B8D0070BCB1 /* Modal */,
 				DC3C304B1CAB6B000070BCB1 /* App Delegate */,
@@ -310,6 +326,39 @@
 			name = Log;
 			sourceTree = "<group>";
 		};
+		DC9C53731CCDD878004AD0E7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DC9C537E1CCDE560004AD0E7 /* Regex */,
+				DC9C53741CCDD889004AD0E7 /* Property */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		DC9C53741CCDD889004AD0E7 /* Property */ = {
+			isa = PBXGroup;
+			children = (
+				DC9C53751CCDD89C004AD0E7 /* LSProperty.h */,
+				DC9C53761CCDD89C004AD0E7 /* LSProperty.m */,
+				DC9C53781CCDD955004AD0E7 /* LSCaptureProperty.h */,
+				DC9C53791CCDD955004AD0E7 /* LSCaptureProperty.m */,
+				DC9C537B1CCDDDD8004AD0E7 /* LSRegexProperty.h */,
+				DC9C537C1CCDDDD8004AD0E7 /* LSRegexProperty.m */,
+			);
+			name = Property;
+			sourceTree = "<group>";
+		};
+		DC9C537E1CCDE560004AD0E7 /* Regex */ = {
+			isa = PBXGroup;
+			children = (
+				DC9C537F1CCDE571004AD0E7 /* LSCaptureResult.h */,
+				DC9C53801CCDE571004AD0E7 /* LSCaptureResult.m */,
+				DC9C53821CCDE792004AD0E7 /* LSRegex.h */,
+				DC9C53831CCDE792004AD0E7 /* LSRegex.m */,
+			);
+			name = Regex;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -441,15 +490,20 @@
 			files = (
 				DC3C30931CACB8EB0070BCB1 /* LSLineFormatFile.m in Sources */,
 				DC3C304E1CAB6B0B0070BCB1 /* AppDelegate.m in Sources */,
+				DC9C537D1CCDDDD8004AD0E7 /* LSRegexProperty.m in Sources */,
+				DC9C53841CCDE792004AD0E7 /* LSRegex.m in Sources */,
 				DC3C306D1CAB958A0070BCB1 /* LSCaptureObject.m in Sources */,
 				DC9C53721CC76766004AD0E7 /* LSLog.m in Sources */,
 				DC3C308D1CACB6120070BCB1 /* LSLogFile.m in Sources */,
 				DC3C30761CABA0300070BCB1 /* LSRegexObject.m in Sources */,
+				DC9C537A1CCDD955004AD0E7 /* LSCaptureProperty.m in Sources */,
+				DC9C53771CCDD89C004AD0E7 /* LSProperty.m in Sources */,
 				DC3C30831CABDE330070BCB1 /* LSLineObject.m in Sources */,
 				DC3C307D1CABB28B0070BCB1 /* LSPairArray.m in Sources */,
 				DC3C308A1CACB5B30070BCB1 /* LSFileBase.m in Sources */,
 				DC3C30971CACC19D0070BCB1 /* LSXMLHelper.m in Sources */,
 				DC3C307A1CABB1DC0070BCB1 /* LSPair.m in Sources */,
+				DC9C53811CCDE571004AD0E7 /* LSCaptureResult.m in Sources */,
 				DC3C30801CABD85B0070BCB1 /* LSConfigObjectFactory.m in Sources */,
 				DC3C30701CAB959F0070BCB1 /* LSConfigObject.m in Sources */,
 				DC3C30901CACB7680070BCB1 /* LSConfigFile.m in Sources */,

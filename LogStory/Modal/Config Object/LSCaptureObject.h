@@ -9,23 +9,25 @@
 #import <Foundation/Foundation.h>
 #import "LSConfigObject.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
-@class LSConfigObject;
-
 extern  NSString * const kLSCaptureObject;
 extern  NSString * const kLSCaptureObjectList;
 
 @interface LSCaptureObject : LSConfigObject
 
-@property (nonatomic, readonly, copy) NSString     *name;
-@property (nonatomic, readonly, copy) NSString     *type;
+@property (nonatomic, readwrite, copy) NSString     *name;
+@property (nonatomic, readwrite, copy) NSString     *type;
 
 @end
 
-@interface LSCaptureObjectList : LSConfigObjectList
+@interface LSCaptureObjectList : LSConfigObject
 
-@property (nonatomic, readonly, copy) NSArray      *captureObjects;
+@property (nonatomic, readonly, assign) NSInteger    count;
+
+-(LSCaptureObject *)captureObjectAtIndex:(NSInteger)index;
+
+-(void)addCaptureObject:(LSCaptureObject *)captureObj;
+
+-(void)removeCaptureObject:(LSCaptureObject *)captureObj;
 
 @end
 
@@ -36,6 +38,3 @@ extern  NSString * const kLSCaptureObjectList;
 +(BOOL)isleagalCaptureType:(NSString *)type;
 
 @end
-
-
-NS_ASSUME_NONNULL_END

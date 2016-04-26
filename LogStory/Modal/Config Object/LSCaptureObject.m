@@ -7,8 +7,6 @@
 //
 
 #import "LSCaptureObject.h"
-
-#import "LSXMLHelper.h"
 #import "LSError.h"
 
 NSString * const kLSCaptureObject       = @"LSCapture";
@@ -18,6 +16,11 @@ static NSString * const kNameNodeKey    = @"Name";
 static NSString * const kTypeNodeKey    = @"Type";
 
 @implementation LSCaptureObject
+
++(NSString *)xmlNodeName
+{
+    return @"LSCapture";
+}
 
 -(instancetype)initWithElementNode:(NSXMLElement *)element error:(NSError * __autoreleasing *)outError
 {
@@ -33,89 +36,88 @@ static NSString * const kTypeNodeKey    = @"Type";
 
 -(BOOL)readElement:(NSXMLElement *)element error:(NSError * __autoreleasing *)outError
 {
-    // check
-    if (![element.name isEqualToString:kLSCaptureObject])
+    NSString *nameString = [_attributes valueForKey:kNameNodeKey];
+    if ([nameString length])
     {
-        if (outError)
-        {
-            *outError = [LSError errorFromClass:self.class
-                                       selector:_cmd
-                                         format:@"Initialization failed, because input element with wrong name:%@", element.name];
-        }
+        self.name = nameString;
+    }
+    else
+    {
+        RETURN_OUT_ERROR(@"Initialization failed, because '%@' node is empty", kNameNodeKey);
         return NO;
     }
     
-    // read <Name></Name>
-    NSXMLElement *nameNode = [LSXMLHelper firtElementWithName:kNameNodeKey ofParent:element];
-    if (!nameNode)
+    NSString *typeString = [_attributes valueForKey:kTypeNodeKey];
+    if ([typeString length])
     {
-        if (outError)
-        {
-            *outError = [LSError errorFromClass:self.class
-                                       selector:_cmd
-                                         format:@"Initialization failed, because can't find %@ element in input element:%@", kNameNodeKey, element.name];
-        }
-        return NO;
+        self.type = typeString;
     }
-    _name = [nameNode stringValue];
-    if (![_name length])
+    else
     {
-        if (outError)
-        {
-            *outError = [LSError errorFromClass:self.class
-                                       selector:_cmd
-                                         format:@"Initialization failed, because %@ value is empty", kNameNodeKey];
-        }
+        RETURN_OUT_ERROR(@"Initialization failed, because '%@' node is empty", kNameNodeKey);
         return NO;
     }
     
-    // read <Type></Type>
-    NSXMLElement *typeNode = [LSXMLHelper firtElementWithName:kTypeNodeKey ofParent:element];
-    if (!typeNode)
+    if (![LSCaptureType isleagalCaptureType:self.type])
     {
-        if (outError)
-        {
-            *outError = [LSError errorFromClass:self.class
-                                       selector:_cmd
-                                         format:@"Initialization failed, because can't find %@ element in input element:%@", kNameNodeKey, element.name];
-        }
-        return NO;
-    }
-    _type = [typeNode stringValue];
-    if (![_type length])
-    {
-        if (outError)
-        {
-            *outError = [LSError errorFromClass:self.class
-                                       selector:_cmd
-                                         format:@"Initialization failed, because %@ value is empty", kNameNodeKey];
-        }
-        return NO;
-    }
-    if (![LSCaptureType isleagalCaptureType:_type])
-    {
-        if (outError)
-        {
-            *outError = [LSError errorFromClass:self.class
-                                       selector:_cmd
-                                         format:@"Initialization failed, because %@ is not leagal capture type", _type];
-        }
+        RETURN_OUT_ERROR(@"Initialization failed, because %@ is not leagal capture type", self.type);
         return NO;
     }
     
     return YES;
 }
 
+-(void)setName:(NSString *)name
+{
+    if ([name length])
+    {
+        _name = [name copy];
+        
+        [self updateAttribute:self.name forKey:kNameNodeKey];
+    }
+}
+
+-(void)setType:(NSString *)type
+{
+    if ([type length])
+    {
+        _type = [type copy];
+        
+        [self updateAttribute:self.type forKey:kTypeNodeKey];
+    }
+}
+
 @end
 
+
+@interface LSCaptureObjectList()
+
+@property (nonatomic, readwrite, strong) NSMutableArray<LSCaptureObject *> *captureList;
+
+@end
+
+
 @implementation LSCaptureObjectList
+
++(NSString *)xmlNodeName
+{
+    return @"LSCaptureList";
+}
+
+-(instancetype)init
+{
+    if (self = [super init])
+    {
+        _captureList = [NSMutableArray array];
+    }
+    return self;
+}
 
 -(instancetype)initWithElementNode:(NSXMLElement *)element error:(NSError * __autoreleasing *)outError
 {
     if (self = [super initWithElementNode:element error:outError])
     {
-        _captureObjects = [self readElement:element error:outError];
-        if (!_captureObjects)
+        if (![self readElement:element error:outError])
         {
             return nil;
         }
@@ -123,40 +125,44 @@ static NSString * const kTypeNodeKey    = @"Type";
     return self;
 }
 
--(NSArray *)readElement:(NSXMLElement *)element error:(NSError * __autoreleasing *)outError
+-(BOOL)readElement:(NSXMLElement *)element error:(NSError * __autoreleasing *)outError
 {
-    // check
-    if (![element.name isEqualToString:kLSCaptureObjectList])
+    NSArray *captures = [_attributes valuesForKey:[LSCaptureObject xmlNodeName]];
+    if ([captures count])
     {
-        if (outError)
-        {
-            *outError = [LSError errorFromClass:self.class
-                                       selector:_cmd
-                                         format:@"Initialization failed, because input element with wrong name:%@", element.name];
-        }
-        return nil;
+        _captureList = [NSMutableArray arrayWithArray:captures];
     }
     
-    NSMutableArray *array = [NSMutableArray array];
-    NSArray *nodeList = [element elementsForName:kLSCaptureObject];
-    
-    if ([nodeList count])
+    return YES;
+}
+
+-(NSInteger)count
+{
+    return [_captureList count];
+}
+
+-(LSCaptureObject *)captureObjectAtIndex:(NSInteger)index
+{
+    if (index >= 0 && index < self.count)
     {
-        for (NSXMLElement *child in nodeList)
-        {
-            if (!child) continue;
-            if (![child.name isEqualToString:kLSCaptureObject]) continue;
-            
-            LSCaptureObject *obj = [[LSCaptureObject alloc]initWithElementNode:child error:outError];
-            if (!obj)
-            {
-                return nil;
-            }
-            [array addObject:obj];
-        }
+        return [_captureList objectAtIndex:index];
     }
+    return nil;
+}
+
+-(void)addCaptureObject:(LSCaptureObject *)captureObj
+{
+    [_captureList addObject:captureObj];
     
-    return [NSArray arrayWithArray:array];
+    [_attributes addPair:[[LSPair alloc] initWithValue:<#(id)#> andKey:<#(NSString *)#>]]
+}
+
+-(void)removeCaptureObject:(LSCaptureObject *)captureObj
+{
+    if (captureObj)
+    {
+        [_captureList removeObject:captureObj];
+    }
 }
 
 @end

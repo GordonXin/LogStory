@@ -14,6 +14,8 @@
 
 @property (nonatomic, readwrite, strong) id        value;
 
--(instancetype)initWithValue:(id)value forKey:(NSString *)key;
+-(instancetype)initWithValue:(id)value andKey:(NSString *)key;
+
+-(LSPair *)copy;
 
 @end

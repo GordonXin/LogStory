@@ -7,31 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@class LSPairArray;
+#import "LSPairArray.h"
 
 @interface LSConfigObject : NSObject
+{
+@protected
+    LSPairArray  *_attributes;
+    NSXMLElement *_xmlNode;
+}
 
--(instancetype)initWithElementNode:(NSXMLElement *)element error:(NSError *__autoreleasing *)outError;
++(NSString *)xmlNodeName;
 
--(instancetype)initWithAttributes:(LSPairArray *)attributes;
+-(instancetype)init;
 
-@property (nonatomic, readonly, strong) LSPairArray *attributes;
+-(instancetype)initWithElementNode:(NSXMLElement *)element
+                             error:(NSError *__autoreleasing *)outError;
 
--(NSXMLElement *)element;
+-(NSXMLElement *)generateXMLNode;
 
-@end
-
-
-
-
-@interface LSConfigObjectList : LSConfigObject
-
--(instancetype)initWithObjectList:(LSPairArray *)attributes array:(NSMutableArray *)objectList;
-
-@property (nonatomic, readonly, strong) NSMutableArray *objectList;
-
--(NSString *)subElementName;
+-(void)updateAttribute:(id)newValue forKey:(NSString *)key;
 
 @end
-

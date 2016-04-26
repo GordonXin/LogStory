@@ -10,14 +10,19 @@
 
 @implementation LSPair
 
--(instancetype)initWithValue:(id)value forKey:(NSString *)key
+-(instancetype)initWithValue:(id)value andKey:(NSString *)key
 {
     if (self = [super init])
     {
-        _value = value;
-        _key = [key copy];
+        self.value = value;
+        self.key = key;
     }
     return self;
+}
+
+-(LSPair *)copy
+{
+    return [[LSPair alloc] initWithValue:self.value andKey:self.key];
 }
 
 @end

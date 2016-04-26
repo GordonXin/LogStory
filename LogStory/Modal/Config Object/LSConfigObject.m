@@ -7,20 +7,21 @@
 //
 
 #import "LSConfigObject.h"
-
-#import "LSError.h"
-#import "LSException.h"
-
-
-#import "LSPairArray.h"
 #import "LSConfigObjectFactory.h"
+#import "LSError.h"
 
 @implementation LSConfigObject
 
--(instancetype)init
++(NSString *)xmlNodeName
+{
+    return @"BaseConfig";
+}
+
+-(instancetype) init
 {
     if (self = [super init])
     {
+        _xmlNode = nil;
         _attributes = [LSPairArray pairArray];
     }
     return self;
@@ -30,122 +31,72 @@
 {
     if (element == nil)
     {
-        if (outError)
-        {
-            *outError = [LSError errorFromClass:self.class
-                                       selector:_cmd
-                                         format:@"Initialization failed, because input element is nil"];
-        }
+        RETURN_OUT_ERROR(@"Initialization failed, because input element is nil");
         return nil;
     }
     
     if (self = [self init])
     {
-    }
-    return self;
-}
-
--(instancetype)initWithAttributes:(LSPairArray *)attributes
-{
-    if (self = [self init])
-    {
-        _attributes = attributes ? [attributes copy] : [LSPairArray pairArray];
-    }
-    return self;
-}
-
--(NSXMLElement *)element
-{
-    NSXMLElement *node = [NSXMLElement elementWithName:[self elementName]];
-    
-    for (id aValue in _attributes.allValues)
-    {
-        if ([aValue isKindOfClass:[LSConfigObject class]])
-        {
-            NSXMLElement *subNode = [(LSConfigObject *)aValue element];
-            if (subNode)
-            {
-                [node addChild:subNode];
-            }
-        }
-    }
-    
-    return node;
-}
-
--(NSString *)elementName
-{
-    [LSException raise:SELF_OBJ_NAME format:@""];
-    return nil;
-}
-
-@end
-
-
-
-
-
-@implementation LSConfigObjectList
-
--(instancetype)initWithElementNode:(NSXMLElement *)elementNode
-{
-    if (elementNode == nil)
-    {
-        [LSException raise:SELF_OBJ_NAME format:@""];
-        return nil;
-    }
-    
-    if (self = [super init])
-    {
-        _objectList = [NSMutableArray array];
+        _xmlNode = element;
         
-        for (NSXMLElement *child in elementNode.children)
+        [self loadNodes];
+    }
+    return self;
+}
+
+-(void)loadNodes
+{
+    NSArray *children = [_xmlNode children];
+    for (NSXMLElement *element in children)
+    {
+        LSPair *pair = [LSConfigObjectFactory configObjectWithElement:element];
+        if (pair)
         {
-            if (child && child.name && [child.name isEqualToString:[self subElementName]])
-            {
-                id obj = [LSConfigObjectFactory configObjectWithElement:child];
-                [_objectList addObject:obj];
-            }
-            else
-            {
-                id obj = [LSConfigObjectFactory configObjectWithElement:child];
-                if (obj)
-                {
-                    //[self.attributes setObject:obj forKey:child.name];
-                }
-            }
+            [_attributes addPair:pair];
         }
     }
-    return self;
 }
 
--(instancetype)initWithAttributes:(LSPairArray *)attributes
+-(void)updateAttribute:(id)newValue forKey:(NSString *)key
 {
-    if (self = [super initWithAttributes:attributes])
+    LSPair *pair = [_attributes firstPairWithKey:key];
+    
+    if (pair)
     {
-        _objectList = [NSMutableArray array];
+        pair.value = newValue;
     }
-    return self;
+    else
+    {
+        pair = [[LSPair alloc] initWithValue:newValue andKey:key];
+        [_attributes addPair:pair];
+    }
 }
 
--(instancetype)initWithObjectList:(LSPairArray *)attributes array:(NSMutableArray *)objectList
+-(NSXMLElement *)generateXMLNode
 {
-    if (self = [super initWithAttributes:attributes])
+    NSXMLElement *element = [[NSXMLElement alloc] initWithName:[[self class] xmlNodeName]];
+    
+    for (NSInteger i = 0; i < _attributes.count; ++i)
     {
-        if (objectList)
+        NSXMLElement *child = nil;
+        LSPair *pair = [_attributes pairAtIndex:i];
+        if ([pair.value isKindOfClass:[LSConfigObject class]])
         {
-            _objectList = [objectList copy];
+            child = [(LSConfigObject *)pair.value generateXMLNode];
+        }
+        else if ([pair.value isKindOfClass:[NSString class]])
+        {
+            child = [[NSXMLElement alloc] initWithName:pair.key];
+            [child setStringValue:pair.value];
+        }
+        
+        if (child)
+        {
+            [element addChild:child];
         }
     }
-    return self;
-}
-
--(NSString *)subElementName
-{
-    [LSException raise:SELF_OBJ_NAME format:@""];
-    return nil;
+    
+    return element;
 }
 
 @end
-
-
