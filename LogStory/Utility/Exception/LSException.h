@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 
 #define RAISE_EXCEPTION(inFormat...) \
-[LSException raiseFromClass:NSStringFromClass([self Class]) selector:NSStringFromSelector(_cmd), inFormat]; \
+\
+[LSException raiseFromClass:NSStringFromClass([self class]) selector:NSStringFromSelector(_cmd) format:inFormat]; \
 
 @interface LSException : NSException
 

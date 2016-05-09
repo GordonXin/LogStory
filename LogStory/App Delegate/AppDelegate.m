@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "LSTest.h"
+#import "LSLog.h"
 
 @interface AppDelegate ()
 
@@ -15,11 +17,17 @@
 
 @implementation AppDelegate
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
     // Insert code here to initialize your application
+    LOG(@"****** LogStory start******");
+    
+    
+    [LSTest runTest2];
 }
 
-- (void)applicationWillTerminate:(NSNotification *)aNotification {
+- (void)applicationWillTerminate:(NSNotification *)aNotification
+{
     // Insert code here to tear down your application
 }
 

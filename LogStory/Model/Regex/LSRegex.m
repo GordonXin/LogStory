@@ -7,73 +7,135 @@
 //
 
 #import "LSRegex.h"
-#import "LSRegexProperty.h"
-#import "LSCaptureResult.h"
-
-#import "LSError.h"
+#import "LSCapture.h"
+#import "LSRegexConfiguration.h"
 
 @interface LSRegex ()
 
-@property (nonatomic, readwrite, strong) NSRegularExpression *regex;
-
-@property (nonatomic, readwrite, strong) LSRegexProperty *property;
+@property (nonatomic, readwrite, strong) NSRegularExpression *regularExpression;
 
 @end
 
 @implementation LSRegex
 
--(instancetype)initWithProperty:(LSRegexProperty *)property error:(NSError **)outError
+-(instancetype)initWithConfiguration:(LSConfiguration *)config
 {
-    if (self = [super init])
+    if (self = [super initWithConfiguration:config])
     {
-        NSRegularExpression *expr = [self createRegexWithProperty:property error:outError];
-        if (!expr)
+        if (![self.configuration isKindOfClass:[LSRegexConfiguration class]])
         {
+            RAISE_EXCEPTION(@"Wrong configuration object class:%@", [self.configuration class]);
             return nil;
         }
         
-        self.property = property;
-        self.regex = expr;
+        NSError *error = nil;
+        NSRegularExpressionOptions options = 0;
+        LSRegexConfiguration *config = (LSRegexConfiguration *)self.configuration;
+        if (!config.isCaseSensitive)
+        {
+            options |= NSRegularExpressionCaseInsensitive;
+        }
+        if (!config.isMatchLineSeparator)
+        {
+            options |= NSRegularExpressionDotMatchesLineSeparators;
+        }
+        _regularExpression = [NSRegularExpression regularExpressionWithPattern:config.pattern
+                                                                       options:options
+                                                                         error:&error];
     }
+    
     return self;
 }
 
--(NSRegularExpression *)createRegexWithProperty:(LSRegexProperty *)property error:(NSError **)outError
+-(NSRange)matchOnString:(__weak NSString *)inString inRange:(NSRange)inRange
 {
-    NSRegularExpressionOptions options = property.isCaseSensitive ? 0 : NSRegularExpressionCaseInsensitive;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:property.regexString
-                                                                           options:options
-                                                                             error:outError];
-    if (regex)
+    NSRange retRange = NSMakeRange(NSNotFound, 0);
+    
+    NSTextCheckingResult *result = [_regularExpression firstMatchInString:inString options:0 range:inRange];
+    if (result)
     {
-        if (regex.numberOfCaptureGroups != property.captureArray.count)
-        {
-            RETURN_OUT_ERROR(@"Can't initialize regex because capture count mismatch!");
-            return nil;
-        }
+        retRange = result.range;
     }
     
-    return regex;
+    return retRange;
 }
 
--(NSDictionary *)performRegexOnString:(NSString *)source range:(NSRange)range
+-(NSRange)matchOnString:(__weak NSString *)inString inRange:(NSRange)inRange capture:(NSDictionary *__autoreleasing*)outCapture
 {
-    NSTextCheckingResult *result = [self.regex firstMatchInString:source options:0 range:range];
+    NSRange retRange = NSMakeRange(NSNotFound, 0);
+    LSRegexConfiguration *config = (LSRegexConfiguration *)self.configuration;
     
-    if (result.numberOfRanges > 1)
+    NSTextCheckingResult *result = [_regularExpression firstMatchInString:inString options:0 range:inRange];
+    if (result && result.range.location != NSNotFound)
     {
-        for (NSInteger i = 0; i < self.regex.numberOfCaptureGroups; ++i)
+        retRange = result.range;
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+        NSArray *captures = [config createCaptureObjects];
+        for (NSInteger i = 0; i < [captures count]; ++i)
         {
-            NSRange range = [result rangeAtIndex:i + 1];
-            LSCaptureResult *capture = [[LSCaptureResult alloc] initWithProperty:[self.property.captureArray objectAtIndex:i]
-                                                                          source:source
-                                                                           range:range];
+            LSCapture *aCapture = [captures objectAtIndex:i];
             
+            [aCapture setSource:inString];
+            [aCapture setRange:inRange];
+            
+            [dictionary setObject:aCapture forKey:aCapture.name];
         }
         
-        return [NSDictionary dictionaryWithDictionary:dictionary];
+        if (outCapture)
+        {
+            *outCapture = [NSDictionary dictionaryWithDictionary:dictionary];
+        }
     }
-    return nil;
+    
+    return retRange;
+}
+
+-(void)enumerateMatchInString:(__weak NSString *)inString
+                      inRange:(NSRange)inRange
+                   matchBlock:(MatchBlock)matchBlock
+                completeBlock:(CompleteBlock)completeBlock
+{
+    NSMatchingOptions options = 0;
+    NSDate *date = [NSDate date];
+    
+    [_regularExpression enumerateMatchesInString:inString
+                                         options:options
+                                           range:inRange
+                                      usingBlock:^(NSTextCheckingResult * result, NSMatchingFlags flags, BOOL *stop)
+    {
+        LSRegexConfiguration *config = (LSRegexConfiguration *)self.configuration;
+        if (result && result.range.location != NSNotFound)
+        {
+            NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+            NSArray *captures = [config createCaptureObjects];
+            for (NSInteger i = 0; i < [captures count]; ++i)
+            {
+                LSCapture *aCapture = [captures objectAtIndex:i];
+                
+                [aCapture setSource:inString];
+                [aCapture setRange:[result rangeAtIndex:i + 1]];
+                
+                [dictionary setObject:aCapture forKey:aCapture.name];
+            }
+            
+            if (matchBlock)
+            {
+                BOOL ret = matchBlock(result.range, [NSMutableDictionary dictionaryWithDictionary:dictionary]);
+                if (ret == NO)
+                {
+                    *stop = YES;
+                }
+            }
+        }
+    }];
+    
+    if (completeBlock)
+    {
+        completeBlock();
+    }
+    
+    NSTimeInterval ti = [[NSDate date] timeIntervalSinceDate:date];
+    ti = ti;
 }
 
 @end

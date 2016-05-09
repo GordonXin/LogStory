@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define RETURN_OUT_ERROR(inFormat...) \
+\
 if (outError) \
 { \
     *outError = [LSError errorFromClass:NSStringFromClass([self class]) selector:NSStringFromSelector(_cmd) format:inFormat]; \

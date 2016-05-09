@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "LSLog.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 

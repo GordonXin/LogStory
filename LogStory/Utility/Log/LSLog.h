@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 
 #define LOGERR(inFormat...) \
-[LSLog logErrorWithClassName:NSStringFromClass([self class]), NSStringFromSelector:(_cmd), messageFormat:inFormat];
+[LSLog logErrorWithClassName:NSStringFromClass([self class]) selector:NSStringFromSelector(_cmd) messageFormat:inFormat];
 
 #define LOG(inFormat...) \
-[LSLog logInfoWithClassName: NSStringFromClass([self class]), NSStringFromSelector:(_cmd), messageFormat:inFormat];
+[LSLog logInfoWithClassName: NSStringFromClass([self class]) selector:NSStringFromSelector(_cmd) messageFormat:inFormat];
 
 @interface LSLog : NSObject
 

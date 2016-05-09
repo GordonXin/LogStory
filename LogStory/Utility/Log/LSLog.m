@@ -38,10 +38,15 @@ static NSString * const logTypeWarn  = @" Warn";
     return self;
 }
 
+-(void)dealloc
+{
+    [self.fileHandle closeFile];
+}
+
 -(void)resetFilePath
 {
-    NSString *bundlePath = [[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent];
-    NSString *fileName = [NSString stringWithFormat:@"LogStory %@", [_dateFormatter stringFromDate:[NSDate date]]];
+    NSString *bundlePath = @"/temp";//[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent];
+    NSString *fileName = [NSString stringWithFormat:@"LogStory %@.log", [_dateFormatter stringFromDate:[NSDate date]]];
     NSString *newFilePath = [bundlePath stringByAppendingPathComponent:fileName];
     
     if (![self.filePath isEqualToString:newFilePath])
@@ -63,15 +68,22 @@ static NSString * const logTypeWarn  = @" Warn";
     {
         [[NSFileManager defaultManager] createFileAtPath:filePath
                                                 contents:nil
-                                              attributes:@{NSFileAppendOnly:[NSNumber numberWithBool:YES]}];
+                                              attributes:@{}];
     }
     
-    self.fileHandle = [NSFileHandle fileHandleForWritingAtPath:filePath];
+    NSURL *fileURL = [NSURL fileURLWithPath:filePath isDirectory:NO];
+    
+    NSError *error = nil;
+    self.fileHandle = [NSFileHandle fileHandleForUpdatingURL:fileURL error:&error];
     
     if (self.fileHandle == nil)
     {
         NSLog(@"Can't create File Handle!!!");
         self.filePath = @"";
+    }
+    else
+    {
+        [self.fileHandle seekToEndOfFile];
     }
 }
 
@@ -80,6 +92,7 @@ static NSString * const logTypeWarn  = @" Warn";
     [self resetFilePath];
     if (self.fileHandle)
     {
+        [self.fileHandle writeData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding]];
         [self.fileHandle writeData:[logString dataUsingEncoding:NSUTF8StringEncoding]];
     }
 }

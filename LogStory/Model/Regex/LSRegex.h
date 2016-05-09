@@ -7,13 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LSBaseObject.h"
 
-@class LSRegexProperty;
+typedef BOOL(^ProgressBlock)(NSInteger line);
+typedef BOOL(^MatchBlock)(NSRange matchRange, NSDictionary *captures);
+typedef void(^CompleteBlock)();
 
-@interface LSRegex : NSObject
+@interface LSRegex : LSBaseObject
 
--(instancetype)initWithProperty:(LSRegexProperty *)property error:(NSError * __autoreleasing *)outError;
-
--(NSDictionary *)performRegexOnString:(NSString *)source range:(NSRange)range;
+-(void)enumerateMatchInString:(__weak NSString *)inString
+                      inRange:(NSRange)inRange
+                   matchBlock:(MatchBlock)matchBlock
+                completeBlock:(CompleteBlock)completeBlock;
 
 @end
