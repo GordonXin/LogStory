@@ -18,6 +18,11 @@
 @property (nonatomic, readonly, strong) NSXMLElement *xmlConfig;
 
 /*
+ * indicates whether allows changes configurations
+ */
+@property (nonatomic, readonly, assign) BOOL isConfigable;
+
+/*
  * init method
  */
 -(instancetype)initWithConfig:(NSXMLElement *)xmlConfig error:(LSError*__autoreleasing*)outError;
@@ -27,6 +32,12 @@
  * should be derived by subclasses
  */
 -(id)createObject;
+
+/*
+ * create xml node.
+ * should be derived by subclasses
+ */
+-(NSXMLElement *)createXmlNode;
 
 /*
  * convinient method for xml reading

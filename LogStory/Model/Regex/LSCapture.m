@@ -11,9 +11,6 @@
 
 @implementation LSCapture
 
-@dynamic name;
-@dynamic type;
-
 @synthesize source = _source;
 @synthesize range = _range;
 
@@ -26,22 +23,18 @@
             RAISE_EXCEPTION(@"Wrong configuration objec class:%@", NSStringFromClass([config class]))
         }
         
+        _name = [[self myConfig] name];
+        _type = [[self myConfig] type];
+        
         _source = nil;
         _range = NSMakeRange(NSNotFound, 0);
     }
     return self;
 }
 
--(NSString *)name
+-(LSCaptureConfiguration *)myConfig
 {
-    LSCaptureConfiguration *config = (LSCaptureConfiguration *)self.configuration;
-    return config.name;
-}
-
--(NSString *)type
-{
-    LSCaptureConfiguration *config = (LSCaptureConfiguration *)self.configuration;
-    return config.type;
+    return (LSCaptureConfiguration *)self.configuration;
 }
 
 -(NSString *)valueString

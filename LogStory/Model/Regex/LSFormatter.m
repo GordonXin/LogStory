@@ -49,7 +49,8 @@
     [_regex enumerateMatchInString:inString
                            inRange:inRange
                         matchBlock:matchBlock
-                     completeBlock:completeBlock];
+                     completeBlock:completeBlock
+                        errorBlock:nil];
     
     NSTimeInterval ti = [[NSDate date] timeIntervalSinceDate:date];
     ti = ti;
@@ -63,7 +64,7 @@
 {
     if (self = [super init])
     {
-        _formatterArray = @[];
+        _formatterDictionary = @{};
     }
     return self;
 }
@@ -82,21 +83,24 @@ static LSFormatterManager *_defaultManager;
 -(void)loadFormatters
 {
     NSError *error = nil;
-    NSMutableArray *array = [NSMutableArray array];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     
-    LSFormatter *formatter = [self loadFormatterWithName:@"DataMonitor" error:&error];
-    if (!formatter)
+    NSArray *urls = [[NSBundle mainBundle] URLsForResourcesWithExtension:@"xml" subdirectory:@"Formatter"];
+    for (NSURL *aURL in urls)
     {
-        // show some log
+        LSFormatter *formatter = [self loadFormatterWithURL:aURL error:&error];
+        
+        if (formatter)
+        {
+            [dic setObject:formatter forKey:formatter.name];
+        }
     }
-    [array addObject:formatter];
     
-    _formatterArray = [NSArray arrayWithArray:array];
+    _formatterDictionary = [NSDictionary dictionaryWithDictionary:dic];
 }
 
--(LSFormatter *)loadFormatterWithName:(NSString *)name error:(LSError *__autoreleasing*)outError
+-(LSFormatter *)loadFormatterWithURL:(NSURL *)url error:(LSError *__autoreleasing*)outError
 {
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"DataMonitor" withExtension:@"xml"];
     if (!url)
     {
         return nil;
@@ -115,7 +119,14 @@ static LSFormatterManager *_defaultManager;
     }
     
     LSFormatter *formatter = [config createObject];
+    [formatter setName:[url.lastPathComponent stringByDeletingPathExtension]];
+    
     return formatter;
+}
+
+-(LSFormatter *)formatterWithName:(NSString *)name
+{
+    return [_formatterDictionary objectForKey:name];
 }
 
 @end

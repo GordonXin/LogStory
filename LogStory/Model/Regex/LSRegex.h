@@ -12,12 +12,18 @@
 typedef BOOL(^ProgressBlock)(NSInteger line);
 typedef BOOL(^MatchBlock)(NSRange matchRange, NSDictionary *captures);
 typedef void(^CompleteBlock)();
+typedef BOOL(^ErrorBlock)(NSError *error);
 
 @interface LSRegex : LSBaseObject
+
+-(NSDictionary *)firstMatchInString:(__weak NSString *)inString
+                            inRange:(NSRange)inRange
+                         errorBlock:(ErrorBlock)errorBlock;
 
 -(void)enumerateMatchInString:(__weak NSString *)inString
                       inRange:(NSRange)inRange
                    matchBlock:(MatchBlock)matchBlock
-                completeBlock:(CompleteBlock)completeBlock;
+                completeBlock:(CompleteBlock)completeBlock
+                   errorBlock:(ErrorBlock)errorBlock;
 
 @end

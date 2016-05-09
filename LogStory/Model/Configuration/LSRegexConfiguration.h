@@ -12,25 +12,17 @@ extern NSString * const kLSRegexNodeName;
 extern NSString * const kLSRegexPatternKey;
 extern NSString * const kLSRegexCaseKey;
 extern NSString * const kLSRegexLineKey;
+extern NSString * const kLSRegexCaptureMatchString;
 
 @interface LSRegexConfiguration : LSConfiguration
 
-/*
- * property
- */
-@property (nonatomic, readonly, copy)   NSString *pattern;
+@property (nonatomic, readwrite, copy)   NSString *pattern;
 
-@property (nonatomic, readonly, assign) BOOL isCaseSensitive;
+@property (nonatomic, readwrite, assign) BOOL isCaseSensitive;
 
-@property (nonatomic, readonly, assign) BOOL isMatchLineSeparator;
+@property (nonatomic, readwrite, assign) BOOL isMatchLineSeparator;
 
-@property (nonatomic, readonly, copy)   NSArray *captureConfigurations;
-
-/*
- * init method
- */
--(instancetype)initWithProperty:(NSDictionary *)properties;
-
+@property (nonatomic, readwrite, copy)   NSArray *captureConfigurations;
 
 -(NSArray *)createCaptureObjects;
 

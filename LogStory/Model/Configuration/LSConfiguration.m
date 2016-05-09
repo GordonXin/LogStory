@@ -61,4 +61,9 @@
     return nil;
 }
 
+-(NSXMLElement *)createXmlNode
+{
+    return nil;
+}
+
 @end

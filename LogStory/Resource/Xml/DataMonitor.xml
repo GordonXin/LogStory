@@ -2,21 +2,21 @@
 <LSFormatter>
     
     <LSRegex>
-        <LSPattern>(?&lt;=\n|\A)\[[0-9a-fA-F]+?\]\[([0-9]{2}[a-zA-Z]{3}[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3})\]\s(?:\[(.+?)\]\s)?(.+?)\n(?=\\[|\\z)</LSPattern>
-        <LSCaseSensitive>TRUE</LSCaseSensitive>
-        <LSMatchLine>FALSE</LSMatchLine>
+        <LSPattern>(?&lt;=\n|\A)\[[0-9a-fA-F]+?\]\[([0-9]{2}[a-zA-Z]{3}[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3})\]\s(?:\[(.+?)\]\s)?(.+?)\n(?=\[|\z)</LSPattern>
+        <CaseSensitive>TRUE</CaseSensitive>
+        <MatchLine>FALSE</MatchLine>
         
         <LSCapture>
-            <LSName>Time</LSName>
-            <LSType>String</LSType>
+            <Name>Time</Name>
+            <Type>String</Type>
         </LSCapture>
         <LSCapture>
-            <LSName>LogLevel</LSName>
-            <LSType>String</LSType>
+            <Name>LogLevel</Name>
+            <Type>String</Type>
         </LSCapture>
         <LSCapture>
-            <LSName>Event</LSName>
-            <LSType>String</LSType>
+            <Name>Event</Name>
+            <Type>String</Type>
         </LSCapture>
         
     </LSRegex>

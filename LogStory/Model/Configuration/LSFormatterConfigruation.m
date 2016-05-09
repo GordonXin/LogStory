@@ -104,4 +104,33 @@ NSString * const kLSFormatterEventCapture = @"Event";
     return [[LSFormatter alloc] initWithConfiguration:self];
 }
 
+-(NSXMLElement *)createXmlNode
+{
+    NSError *error = nil;
+    if (![self checkWithError:&error])
+    {
+        RAISE_EXCEPTION(@"Can't create xml node because: %@", [error description]);
+        return nil;
+    }
+    
+    NSXMLElement *element = [super createXmlNode];
+    if (element == nil)
+    {
+        element = [NSXMLElement elementWithName:kLSFormatterNodeName];
+    }
+    
+    [element addChild:[self.regex createXmlNode]];
+    [element addChild:[NSXMLElement elementWithName:kLSFormatterTimeKey stringValue:self.timeFormat]];
+    
+    return element;
+}
+
+-(NSDateFormatter *)dateFormatter
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:self.timeFormat];
+    
+    return formatter;
+}
+
 @end

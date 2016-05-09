@@ -26,6 +26,10 @@
 
 @property (nonatomic, readonly, copy) NSArray *formatterArray;
 
+@property (nonatomic, readonly, copy) NSDictionary *formatterDictionary;
+
 +(LSFormatterManager *)defaultManager;
+
+-(LSFormatter *)formatterWithName:(NSString *)name;
 
 @end

@@ -11,8 +11,8 @@
 
 NSString * const kLSCaptureNodeName = @"LSCapture";
 
-NSString * const kLSCaptureNameKey = @"LSName";
-NSString * const kLSCaptureTypeKey = @"LSType";
+NSString * const kLSCaptureNameKey = @"Name";
+NSString * const kLSCaptureTypeKey = @"Type";
 
 @implementation LSCaptureConfiguration
 
@@ -20,32 +20,13 @@ NSString * const kLSCaptureTypeKey = @"LSType";
 {
     if (self = [super initWithConfig:xmlConfig error:outError])
     {
-        _name = [[self firstConfigNodeStringValueWithName:kLSCaptureNameKey] copy];
-        _type = [[self firstConfigNodeStringValueWithName:kLSCaptureTypeKey] copy];
+        self.name = [self firstConfigNodeStringValueWithName:kLSCaptureNameKey];
+        self.type = [self firstConfigNodeStringValueWithName:kLSCaptureTypeKey];
         
         if (![self checkWithError:outError])
         {
             return nil;
         }
-    }
-    return self;
-}
-
--(instancetype)initWithProperty:(NSDictionary *)properties
-{
-    NSString *name = [properties objectForKey:kLSCaptureNameKey];
-    NSString *type = [properties objectForKey:kLSCaptureTypeKey];
-    
-    NSXMLElement *element = [NSXMLElement elementWithName:kLSCaptureNodeName];
-    [element addChild:[NSXMLElement elementWithName:kLSCaptureNameKey stringValue:[name copy]]];
-    [element addChild:[NSXMLElement elementWithName:kLSCaptureTypeKey stringValue:[type copy]]];
-    
-    NSError *error = nil;
-    self = [super initWithConfig:element error:&error];
-    if (!self)
-    {
-        RAISE_EXCEPTION(@"can't create configuration object because %@", [error description]);
-        return nil;
     }
     return self;
 }
@@ -69,6 +50,27 @@ NSString * const kLSCaptureTypeKey = @"LSType";
 -(id)createObject
 {
     return [[LSCapture alloc] initWithConfiguration:self];
+}
+
+-(NSXMLElement *)createXmlNode
+{
+    NSError *error = nil;
+    if (![self checkWithError:&error])
+    {
+        RAISE_EXCEPTION(@"Can't create xml node because: %@", [error description]);
+        return nil;
+    }
+    
+    NSXMLElement *element = [super createXmlNode];
+    if (element == nil)
+    {
+        element = [[NSXMLElement alloc] initWithName:kLSCaptureNodeName];
+    }
+    
+    [element addChild:[NSXMLElement elementWithName:kLSCaptureNameKey stringValue:self.name]];
+    [element addChild:[NSXMLElement elementWithName:kLSCaptureTypeKey stringValue:self.type]];
+    
+    return element;
 }
 
 @end

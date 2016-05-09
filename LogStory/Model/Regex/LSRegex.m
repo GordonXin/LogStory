@@ -47,53 +47,34 @@
     return self;
 }
 
--(NSRange)matchOnString:(__weak NSString *)inString inRange:(NSRange)inRange
+-(NSDictionary *)firstMatchInString:(NSString *__weak)inString
+                            inRange:(NSRange)inRange
+                         errorBlock:(ErrorBlock)errorBlock
 {
-    NSRange retRange = NSMakeRange(NSNotFound, 0);
-    
-    NSTextCheckingResult *result = [_regularExpression firstMatchInString:inString options:0 range:inRange];
-    if (result)
-    {
-        retRange = result.range;
-    }
-    
-    return retRange;
-}
-
--(NSRange)matchOnString:(__weak NSString *)inString inRange:(NSRange)inRange capture:(NSDictionary *__autoreleasing*)outCapture
-{
-    NSRange retRange = NSMakeRange(NSNotFound, 0);
+    NSMutableDictionary *ret = [NSMutableDictionary dictionary];
     LSRegexConfiguration *config = (LSRegexConfiguration *)self.configuration;
-    
     NSTextCheckingResult *result = [_regularExpression firstMatchInString:inString options:0 range:inRange];
+    
     if (result && result.range.location != NSNotFound)
     {
-        retRange = result.range;
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
         NSArray *captures = [config createCaptureObjects];
-        for (NSInteger i = 0; i < [captures count]; ++i)
+        for (NSInteger i = 0; i < result.numberOfRanges && i < captures.count; ++i)
         {
             LSCapture *aCapture = [captures objectAtIndex:i];
-            
             [aCapture setSource:inString];
-            [aCapture setRange:inRange];
-            
-            [dictionary setObject:aCapture forKey:aCapture.name];
-        }
-        
-        if (outCapture)
-        {
-            *outCapture = [NSDictionary dictionaryWithDictionary:dictionary];
+            [aCapture setRange:[result rangeAtIndex:i]];
+            [ret setObject:aCapture forKey:aCapture.name];
         }
     }
     
-    return retRange;
+    return ret;
 }
 
 -(void)enumerateMatchInString:(__weak NSString *)inString
                       inRange:(NSRange)inRange
                    matchBlock:(MatchBlock)matchBlock
                 completeBlock:(CompleteBlock)completeBlock
+                   errorBlock:(ErrorBlock)errorBlock
 {
     NSMatchingOptions options = 0;
     NSDate *date = [NSDate date];
@@ -108,13 +89,11 @@
         {
             NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
             NSArray *captures = [config createCaptureObjects];
-            for (NSInteger i = 0; i < [captures count]; ++i)
+            for (NSInteger i = 0; i < [captures count] && i < result.numberOfRanges; ++i)
             {
                 LSCapture *aCapture = [captures objectAtIndex:i];
-                
                 [aCapture setSource:inString];
-                [aCapture setRange:[result rangeAtIndex:i + 1]];
-                
+                [aCapture setRange:[result rangeAtIndex:i]];
                 [dictionary setObject:aCapture forKey:aCapture.name];
             }
             

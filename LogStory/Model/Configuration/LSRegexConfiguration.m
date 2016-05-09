@@ -13,8 +13,10 @@
 NSString * const kLSRegexNodeName = @"LSRegex";
 
 NSString * const kLSRegexPatternKey = @"LSPattern";
-NSString * const kLSRegexCaseKey = @"LSCaseSensitive";
-NSString * const kLSRegexLineKey = @"LSMatchLine";
+NSString * const kLSRegexCaseKey = @"CaseSensitive";
+NSString * const kLSRegexLineKey = @"MatchLine";
+
+NSString * const kLSRegexCaptureMatchString = @"MatchString";
 
 @implementation LSRegexConfiguration
 
@@ -34,6 +36,14 @@ NSString * const kLSRegexLineKey = @"LSMatchLine";
         
         // 3. load capture array
         NSMutableArray *captures = [NSMutableArray array];
+        
+        // add a default capture
+        LSCaptureConfiguration *defaultConfig = [[LSCaptureConfiguration alloc] init];
+        defaultConfig.name = kLSRegexCaptureMatchString;
+        defaultConfig.type = @"String";
+        [captures addObject:defaultConfig];
+        
+        // add custom capture
         NSArray *array = [self.xmlConfig elementsForName:kLSCaptureNodeName];
         for (NSXMLElement *element in array)
         {
@@ -55,45 +65,6 @@ NSString * const kLSRegexLineKey = @"LSMatchLine";
     return self;
 }
 
--(instancetype)initWithProperty:(NSDictionary *)properties
-{
-    NSXMLElement *element = [NSXMLElement elementWithName:kLSRegexNodeName];
-    
-    NSString *key = kLSRegexPatternKey;
-    NSString *val = [properties objectForKey:kLSRegexPatternKey];
-    [element addChild:[NSXMLElement elementWithName:key stringValue:[val copy]]];
-    
-    key = kLSRegexCaseKey;
-    val = [properties objectForKey:key];
-    if ([val length])
-    {
-        [element addChild:[NSXMLElement elementWithName:key stringValue:[val copy]]];
-    }
-    
-    key = kLSRegexLineKey;
-    val = [properties objectForKey:key];
-    if ([val length])
-    {
-        [element addChild:[NSXMLElement elementWithName:key stringValue:[val copy]]];
-    }
-    
-    key = kLSCaptureNodeName;
-    NSArray *objs = [properties objectForKey:key];
-    for (LSCaptureConfiguration *aConfig in objs)
-    {
-        [element addChild:[aConfig.xmlConfig copy]];
-    }
-    
-    NSError *error = nil;
-    self = [self initWithConfig:element error:&error];
-    if (!self)
-    {
-        RAISE_EXCEPTION(@"Can't init from properies because %@", [error description]);
-        return nil;
-    }
-    return self;
-}
-
 -(BOOL)checkWithError:(LSError *__autoreleasing *)outError
 {
     if (![_pattern length])
@@ -108,9 +79,24 @@ NSString * const kLSRegexLineKey = @"LSMatchLine";
         return NO;
     }
     
-    if (exp.numberOfCaptureGroups < _captureConfigurations.count)
+    if (exp.numberOfCaptureGroups + 1 < _captureConfigurations.count)
     {
         RETURN_OUT_ERROR(@"Capture group count mismatch, hope to capture:%ld, actuall:%ld", _captureConfigurations.count, exp.numberOfCaptureGroups);
+        return NO;
+    }
+    
+    BOOL hasDefaultConfig = FALSE;
+    for (LSCaptureConfiguration *aConfig in self.captureConfigurations)
+    {
+        if ([aConfig.name isEqualToString:kLSRegexCaptureMatchString])
+        {
+            hasDefaultConfig = TRUE;
+            break;
+        }
+    }
+    if (!hasDefaultConfig)
+    {
+        RETURN_OUT_ERROR(@"Capture group dont't contain default capture");
         return NO;
     }
     
@@ -120,6 +106,41 @@ NSString * const kLSRegexLineKey = @"LSMatchLine";
 -(id)createObject
 {
     return [[LSRegex alloc] initWithConfiguration:self];
+}
+
+-(NSXMLElement *)createXmlNode
+{
+    NSError *error = nil;
+    if (![self checkWithError:&error])
+    {
+        RAISE_EXCEPTION(@"Can't create xml node because: %@", [error description]);
+        return nil;
+    }
+    
+    NSXMLElement *element = [super createXmlNode];
+    if (element == nil)
+    {
+        element = [NSXMLElement elementWithName:kLSRegexNodeName];
+    }
+    
+    [element addChild:[NSXMLElement elementWithName:kLSRegexPatternKey
+                                        stringValue:self.pattern]];
+    
+    [element addChild:[NSXMLElement elementWithName:kLSRegexCaseKey
+                                        stringValue:[NSString stringWithFormat:@"%@", self.isCaseSensitive ? @"TRUE" : @"FALSE"]]];
+    
+    [element addChild:[NSXMLElement elementWithName:kLSRegexLineKey
+                                        stringValue:[NSString stringWithFormat:@"%@", self.isMatchLineSeparator ? @"TRUE" : @"FALSE"]]];
+    
+    for (LSCaptureConfiguration *aCapture in self.captureConfigurations)
+    {
+        if (![aCapture.name isEqualToString:kLSRegexCaptureMatchString])
+        {
+            [element addChild:[aCapture createXmlNode]];
+        }
+    }
+    
+    return element;
 }
 
 -(NSArray *)createCaptureObjects

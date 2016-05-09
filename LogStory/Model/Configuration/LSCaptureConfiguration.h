@@ -15,17 +15,8 @@ extern NSString * const kLSCaptureTypeKey;
 
 @interface LSCaptureConfiguration : LSConfiguration
 
-/*
- * property
- */
 @property (nonatomic, readwrite, copy) NSString *name;
 
 @property (nonatomic, readwrite, copy) NSString *type;
-
-
-/*
- * init method
- */
--(instancetype)initWithProperty:(NSDictionary *)properties;
 
 @end

@@ -19,8 +19,10 @@ extern NSString * const kLSFormatterEventCapture;
 
 @interface LSFormatterConfigruation : LSConfiguration
 
-@property (nonatomic, readonly, strong) LSRegexConfiguration *regex;
+@property (nonatomic, readwrite, strong) LSRegexConfiguration *regex;
 
-@property (nonatomic, readonly, copy) NSString * timeFormat;
+@property (nonatomic, readwrite, copy) NSString * timeFormat;
+
+-(NSDateFormatter *)dateFormatter;
 
 @end
